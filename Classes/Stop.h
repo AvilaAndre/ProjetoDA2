@@ -6,15 +6,21 @@
 #define PROJETODA2_STOP_H
 
 
+#include <string>
+
 class Stop {
 private:
-    int origin;
-    int destination;
-    int capacity;
-    int duration;
-    
+    int id;
+
+
 public:
-    Stop(int origin_, int destination_, int capacity_, int duration_);
+    Stop(int id_);
+    std::string toString();
+    int getId();
+
+    bool operator==(Stop stop2) {
+        return (this->id == stop2.getId());
+    }
 };
 
 

@@ -4,6 +4,14 @@
 
 #include "Stop.h"
 
-Stop::Stop(int origin_, int destination_, int capacity_, int duration_) : origin(origin_), destination(destination_), capacity(capacity_), duration(duration_) {
+Stop::Stop(int id_) : id(id_) {
 
+}
+
+std::string Stop::toString() {
+    return "id: " + std::to_string(this->id);
+}
+
+int Stop::getId() {
+    return this->id;
 }
