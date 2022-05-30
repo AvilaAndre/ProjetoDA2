@@ -23,13 +23,13 @@ template <class T> class Vertex;
 template <class T>
 class Vertex {
     T info;                // contents
-    std::vector<Edge<T> > adj;  // outgoing edges
+    // outgoing edges
     bool visited;          // auxiliary field
     double dist = 0;
     Vertex<T> *path = nullptr;
     int queueIndex = 0; 		// required by MutablePriorityQueue
 
-    void addEdge(Vertex<T> *dest, double w, double d);
+    void addEdge(Vertex<T> *dest, double c, double d);
 
 public:
     Vertex(T in);
@@ -39,6 +39,8 @@ public:
     Vertex *getPath() const;
     friend class Graph<T>;
     friend class MutablePriorityQueue<Vertex<T>>;
+
+    std::vector<Edge<T> > adj;
 };
 
 
@@ -47,11 +49,11 @@ Vertex<T>::Vertex(T in): info(in) {}
 
 /*
  * Auxiliary function to add an outgoing edge to a vertex (this),
- * with a given destination vertex (d) and edge weight (w).
+ * with a given destination vertex (d) and edge capacity (w).
  */
 template <class T>
-void Vertex<T>::addEdge(Vertex<T> *dest, double w, double d) {
-    adj.push_back(Edge<T>(dest, w, d));
+void Vertex<T>::addEdge(Vertex<T> *dest, double c, double d) {
+    adj.push_back(Edge<T>(dest, c, d));
 }
 
 template <class T>
@@ -79,16 +81,19 @@ Vertex<T> *Vertex<T>::getPath() const {
 template <class T>
 class Edge {
     Vertex<T> * dest;      // destination vertex
-    double weight;         // edge weight
+
     double duration;
 public:
-    Edge(Vertex<T> *dest, double w, double d);
+    Edge(Vertex<T> *dest, double c, double d);
     friend class Graph<T>;
     friend class Vertex<T>;
+
+    // edge capacity
+    double capacity;
 };
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *dest, double w, double d): dest(dest), weight(w), duration(d) {}
+Edge<T>::Edge(Vertex<T> *dest, double c, double d): dest(dest), capacity(c), duration(d) {}
 
 
 /*************************** Graph  **************************/
@@ -98,7 +103,7 @@ class Graph {
     std::vector<Vertex<T> *> vertexSet;    // vertex set
 
     Vertex<T> * initSingleSource(const T &orig);
-    bool relax(Vertex<T> *v, Vertex<T> *w, double weight);
+    bool relax(Vertex<T> *v, Vertex<T> *w, double capacity);
     double ** W = nullptr;   // dist
     int **P = nullptr;   // path
     int findVertexIdx(const T &in) const;
@@ -107,12 +112,14 @@ public:
     ~Graph();
     Vertex<T> *findVertex(const T &in) const;
     bool addVertex(const T &in);
-    bool addEdge(const T &sourc, const T &dest, double w, double d);
+    bool addEdge(const T &sourc, const T &dest, double c, double d);
     int getNumVertex() const;
     std::vector<Vertex<T> *> getVertexSet() const;
+    int getVertexDist(int idx);
 
     // Single-source shortest path - Greedy
     void dijkstraShortestPath(const T &s);
+    void dijkstraHighestCapacityPath(const T &s);
     void unweightedShortestPath(const T &s);
 
     // FP03B - Single-shource shortest path - Dynamic Programming - Bellman-Ford
@@ -170,16 +177,16 @@ bool Graph<T>::addVertex(const T &in) {
 
 /*
  * Adds an edge to a graph (this), given the contents of the source and
- * destination vertices and the edge weight (w).
+ * destination vertices and the edge capacity (w).
  * Returns true if successful, and false if the source or destination vertex does not exist.
  */
 template <class T>
-bool Graph<T>::addEdge(const T &sourc, const T &dest, double w, double d) {
+bool Graph<T>::addEdge(const T &sourc, const T &dest, double c, double d) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
         return false;
-    v1->addEdge(v2, w, d);
+    v1->addEdge(v2, c, d);
     return true;
 }
 
@@ -208,9 +215,9 @@ Vertex<T> * Graph<T>::initSingleSource(const T &origin) {
  * Used by all single-source shortest path algorithms.
  */
 template<class T>
-inline bool Graph<T>::relax(Vertex<T> *v, Vertex<T> *w, double weight) {
-    if (v->dist + weight < w->dist) {
-        w->dist = v->dist + weight;
+inline bool Graph<T>::relax(Vertex<T> *v, Vertex<T> *w, double capacity) {
+    if (v->dist + capacity < w->dist) {
+        w->dist = v->dist + capacity;
         w->path = v;
         return true;
     }
@@ -227,7 +234,7 @@ void Graph<T>::dijkstraShortestPath(const T &origin) {
         auto v = q.extractMin();
         for(auto e : v->adj) {
             auto oldDist = e.dest->dist;
-            if (relax(v, e.dest, e.weight)) {
+            if (relax(v, e.dest, e.capacity)) {
                 if (oldDist == INF)
                     q.insert(e.dest);
                 else
@@ -236,6 +243,26 @@ void Graph<T>::dijkstraShortestPath(const T &origin) {
         }
     }
 }
+
+template<class T>
+void Graph<T>::dijkstraHighestCapacityPath(const T &origin) {
+    auto s = initSingleSource(origin);
+    MutablePriorityQueue<Vertex<T>> q;
+    q.insert(s);
+    while( ! q.empty() ) {
+        auto v = q.extractMin();
+        for(auto e : v->adj) {
+            auto oldCap = e.dest->dist;
+            if (relax(v, e.dest, e.capacity)) {
+                if (oldCap == INF)
+                    q.insert(e.dest);
+                else
+                    q.decreaseKey(e.dest);
+            }
+        }
+    }
+}
+
 
 template<class T>
 void Graph<T>::unweightedShortestPath(const T &orig) {
@@ -294,6 +321,12 @@ std::vector<T> Graph<T>::getfloydWarshallPath(const T &orig, const T &dest) cons
     std::vector<T> res;
     // TODO implement this
     return res;
+}
+
+template<class T>
+int Graph<T>::getVertexDist(int idx) {
+    if (idx <= 0 || idx > getNumVertex()) return -1;
+    return vertexSet[idx]->getDist();
 }
 
 

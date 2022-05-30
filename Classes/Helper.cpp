@@ -18,7 +18,7 @@ void Helper::loadGraphWithData(Graph<Stop> *graphToLoad) {
 
                 for (int i = 1; i <= stoi(vertexs); ++i) {
                     graphToLoad->addVertex(Stop(i));
-                    std::cout << "Added Stop(" << i << ")" << std::endl;
+                    //DEBUG: std::cout << "Added Stop(" << i << ")" << std::endl;
                 }
             }
             else {
@@ -33,7 +33,7 @@ void Helper::loadGraphWithData(Graph<Stop> *graphToLoad) {
                 //stops->emplace_back(std::stoi(origin), std::stoi(destination), std::stoi(capacity), std::stoi(duration));
                 //graph.addVertex(stops[i]);
                 graphToLoad->addEdge(Stop(stoi(origin)), Stop(stoi(destination)), std::stod(capacity), std::stod(duration));
-                std::cout << "Connection " << origin << " with " << destination << " capacity: " << capacity << " duration: " << duration << std::endl;
+                //DEBUG: std::cout << "Connection " << origin << " with " << destination << " capacity: " << capacity << " duration: " << duration << std::endl;
             }
         }
     }
