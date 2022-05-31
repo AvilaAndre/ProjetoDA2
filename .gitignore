@@ -33,4 +33,4 @@
 
 # Not sure which one selects the entire folder
 cmake-build-debug
-*.cmake
+
