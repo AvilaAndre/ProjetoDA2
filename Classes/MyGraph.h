@@ -50,6 +50,9 @@ public:
     int getPath();
     void setPath(int idx);
 
+    bool getVisited();
+    void setVisited(bool value);
+
     friend class MyGraph;
 };
 
@@ -74,6 +77,8 @@ public:
     Vertex getVertex(int idx);
 
     void dijkstraHighestCapacityPath(int i);
+
+    void BFS(int orig);
 
     std::vector<int> getPath(int orig, int dest);
 };

@@ -8,6 +8,7 @@
 #include <cstddef>
 #include <iostream>
 #include <algorithm>
+#include <queue>
 
 #define INF std::numeric_limits<double>::max()
 
@@ -55,6 +56,14 @@ int Vertex::getPath() {
 
 void Vertex::setPath(int idx) {
     this->path = idx;
+}
+
+bool Vertex::getVisited() {
+    return this->visited;
+}
+
+void Vertex::setVisited(bool value) {
+    this->visited = value;
 }
 
 int Vertex::getID() {
@@ -114,6 +123,35 @@ void MyGraph::dijkstraHighestCapacityPath(int origin) {
     }
 }
 
+void MyGraph::BFS(int orig) {
+    for(auto v : vertexSet) {
+        v.setDist(0);
+        v.setPath(-1);
+        v.setVisited(false);
+    }
+
+    std::queue<int> queue;
+    vertexSet[orig].setVisited(true);
+    queue.push(orig);
+
+    while(!queue.empty())
+    {
+        int s = queue.front();
+        queue.pop();
+
+        for (auto adj: vertexSet[s].getAdj())
+        {
+            if (!vertexSet[adj.getDest()].getVisited())
+            {
+                vertexSet[adj.getDest()].setVisited(true);
+                vertexSet[adj.getDest()].setPath(s);
+                vertexSet[adj.getDest()].setDist(adj.capacity);
+                queue.push(adj.getDest());
+            }
+        }
+    }
+}
+
 std::vector<int> MyGraph::getPath(int orig, int dest) {
     std::vector<int> roadPath = std::vector<int>();
     int before = dest;
@@ -127,4 +165,3 @@ std::vector<int> MyGraph::getPath(int orig, int dest) {
     std::reverse(roadPath.begin(),roadPath.end());
     return roadPath;
 }
-
