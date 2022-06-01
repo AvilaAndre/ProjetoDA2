@@ -3,22 +3,22 @@
 
 #include "Classes/Helper.h"
 
-void Situation11(MyGraph graph) {
-    //graph.dijkstraShortestPath(1);
-    graph.dijkstraHighestCapacityPath(1);
-    std::cout << "Hello World!" << std::endl;
-    std::cout << graph.getNumVertex() << std::endl;
-    int record = 0;
-    for (int i = 1; i < graph.getNumVertex(); ++i) {
-        std::cout << i << "- " << graph.getVertex(i).getDist() << std::endl;
-        for (auto edge: graph.getVertexSet()[i].getAdj()) {
-            if (edge.getCapacity() > record) {
-                record = edge.getCapacity();
-            }
+void Situation11(Helper helper) {
+    for (int j = 1; j < 11; ++j) {
+        MyGraph graph = MyGraph();
+        std::string path = "";
+        if (j < 10)
+            path = "in0" + std::to_string(j) + "_b";
+        else
+            path = "in" + std::to_string(j) + "_b";
+        helper.loadGraphWithData(&graph, path);
+        graph.dijkstraHighestCapacityPath(1);
+        for (int i = 1; i <= graph.getNumVertex(); ++i) {
         }
+
+        std::cout << "(" << j << ") Record: " << graph.getVertex(graph.getNumVertex()).getDist() << std::endl; //TODO: Perguntar ao user qual o que ele quer ver :)
     }
 
-    std::cout << "Record: " << record << std::endl;
 
     return;
 }
@@ -34,8 +34,6 @@ int main() {
 
     while (true) {
         Helper help = Helper();
-        MyGraph graph = MyGraph();
-        help.loadGraphWithData(&graph);
         separator();
         std::cout << "* PRESS 0 TO QUIT" << std::endl << "*" << std::endl;
         std::cout << "* Situation:";
@@ -53,7 +51,7 @@ int main() {
         }
         switch (n) {
             case 1:
-                Situation11(graph);
+                Situation11(help);
                 break;
             case 2 :
                 break;

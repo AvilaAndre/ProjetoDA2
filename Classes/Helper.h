@@ -14,7 +14,7 @@
 
 class Helper {
 public:
-    void loadGraphWithData(MyGraph *graphToLoad);
+    void loadGraphWithData(MyGraph *graphToLoad, std::string string);
 };
 
 

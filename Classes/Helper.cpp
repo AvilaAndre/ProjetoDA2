@@ -6,9 +6,9 @@
 #include "Stop.h"
 
 
-void Helper::loadGraphWithData(MyGraph *graphToLoad) {
+void Helper::loadGraphWithData(MyGraph *graphToLoad, std::string path) {
     std::vector<Stop> stops;
-    std::ifstream MyReadFile("../Input/in01_b.txt");
+    std::ifstream MyReadFile("../Input/" + path +".txt");
     int first_line = 0;
     if (MyReadFile.is_open()) {
         std::string line;

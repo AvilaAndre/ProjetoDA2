@@ -33,11 +33,17 @@ private:
     double dist = 0;
     bool visited = false;
 public:
+
+    int getID();
     void addEdge(int dest, double capacity, double duration);
     friend class Graph;
 
     double getDist();
+    void setDist(double value);
+
     std::vector<Edge> getAdj();
+
+    void setPath(int idx);
 };
 
 class MyGraph {
@@ -59,7 +65,6 @@ public:
     std::vector<Vertex> getVertexSet();
 
     Vertex getVertex(int idx);
-
 
     void dijkstraHighestCapacityPath(int i);
 };
