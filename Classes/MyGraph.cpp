@@ -7,6 +7,7 @@
 #include <limits>
 #include <cstddef>
 #include <iostream>
+#include <algorithm>
 
 #define INF std::numeric_limits<double>::max()
 
@@ -46,6 +47,10 @@ void Vertex::setDist(double value) {
 
 std::vector<Edge> Vertex::getAdj() {
     return this->adj;
+}
+
+int Vertex::getPath() {
+    return this->path;
 }
 
 void Vertex::setPath(int idx) {
@@ -94,16 +99,12 @@ void MyGraph::dijkstraHighestCapacityPath(int origin) {
     vertexSet[origin].setDist(INF);
     MaxHeap<int, double> q(getNumVertex(), -1);
 
-
-
-    //std:cout << s.getDist() << "-" << s.getDist() << std::endl;
     for (int k = 1; k <= getNumVertex(); k++) {
         q.insert(k, vertexSet[k].getDist());
     }
     while( q.getSize() > 0 ) {
         auto v = q.removeMax().first;
         for(auto e : vertexSet[v].getAdj()) {
-            //std::cout << min(vertexSet[v].getDist(), e.getCapacity()) << ">" << vertexSet[e.getDest()].getDist() << std::endl;
             if (min(vertexSet[v].getDist(), e.getCapacity()) > vertexSet[e.getDest()].getDist()) {
                 vertexSet[e.getDest()].setDist(min(vertexSet[v].getDist(), e.getCapacity()));
                 vertexSet[e.getDest()].setPath(v);
@@ -112,3 +113,18 @@ void MyGraph::dijkstraHighestCapacityPath(int origin) {
         }
     }
 }
+
+std::vector<int> MyGraph::getPath(int orig, int dest) {
+    std::vector<int> roadPath = std::vector<int>();
+    int before = dest;
+    while (before != orig) {
+        before = getVertex(before).path;
+        if (before == -1) {
+            break;
+        }
+        roadPath.push_back(before);
+    }
+    std::reverse(roadPath.begin(),roadPath.end());
+    return roadPath;
+}
+

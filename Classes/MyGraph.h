@@ -20,6 +20,10 @@ public:
     int getDest();
     double getCapacity();
     double getDuration();
+
+    friend class MyGraph;
+    friend class Vertex;
+
 };
 
 
@@ -43,7 +47,10 @@ public:
 
     std::vector<Edge> getAdj();
 
+    int getPath();
     void setPath(int idx);
+
+    friend class MyGraph;
 };
 
 class MyGraph {
@@ -67,6 +74,8 @@ public:
     Vertex getVertex(int idx);
 
     void dijkstraHighestCapacityPath(int i);
+
+    std::vector<int> getPath(int orig, int dest);
 };
 
 
