@@ -7,7 +7,7 @@
 
 void Helper::loadGraphWithData(Graph<Stop> *graphToLoad) {
     std::vector<Stop> stops;
-    std::ifstream MyReadFile("../Input/in01.txt");
+    std::ifstream MyReadFile("../Input/in01_b.txt");
     int first_line = 0;
     if (MyReadFile.is_open()) {
         std::string line;
