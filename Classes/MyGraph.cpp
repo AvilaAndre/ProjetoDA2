@@ -100,6 +100,20 @@ Vertex MyGraph::getVertex(int idx) {
     return vertexSet[idx];
 }
 
+std::vector<int> MyGraph::getPath(int orig, int dest) {
+    std::vector<int> roadPath = std::vector<int>();
+    int before = dest;
+    while (before != orig) {
+        before = getVertex(before).path;
+        if (before == -1) {
+            break;
+        }
+        roadPath.push_back(before);
+    }
+    std::reverse(roadPath.begin(),roadPath.end());
+    return roadPath;
+}
+
 void MyGraph::dijkstraHighestCapacityPath(int origin) {
     for(auto v : vertexSet) {
         v.setDist(0);
@@ -152,16 +166,65 @@ void MyGraph::BFS(int orig) {
     }
 }
 
-std::vector<int> MyGraph::getPath(int orig, int dest) {
-    std::vector<int> roadPath = std::vector<int>();
-    int before = dest;
-    while (before != orig) {
-        before = getVertex(before).path;
-        if (before == -1) {
-            break;
-        }
-        roadPath.push_back(before);
+vector<pair<int, vector<int>>> MyGraph::find22SolutionRecursiveReacher(int self, double capacity, vector<bool> visited, vector<int> path, double minCapacity, int maxTranshipment, int dest) {
+    //std::cout << "New branch!" << self << std::endl;
+    if (capacity < minCapacity) {
+        //std::cout << "Capacity smaller than the minimum. " << capacity << "<" << minCapacity << std::endl;
+        return {{-1, vector<int>()}};
     }
-    std::reverse(roadPath.begin(),roadPath.end());
-    return roadPath;
+
+    if (path.size() > maxTranshipment) {
+        //std::cout << "Surpassed maximum transhipments. " << path.size() << ">" << maxTranshipment << std::endl;
+        return {{-1, vector<int>()}};
+    }
+    if (self == dest) {
+        //std::cout << "Found the destination!" << std::endl;
+        return {{capacity, path}};
+    }
+
+    path.push_back(self);
+    visited[self] = true;
+    vector<pair<int, vector<int>>> ans = {};
+
+    for (Edge e : vertexSet[self].adj) {
+        if (!visited[e.dest]) {
+            vector<pair<int, vector<int>>> response = find22SolutionRecursiveReacher(e.dest, min(capacity, e.capacity), visited, path, minCapacity,
+                                           maxTranshipment, dest);
+            for (int i = 0; i < response.size(); ++i) {
+                if (response[i].first != -1) {
+                    ans.push_back(response[i]);
+                }
+            }
+        }
+    }
+
+    if (ans.size() == 0){
+        //std::cout << "This branch had no answers!" << std::endl;
+        return {{-1, vector<int>()}};
+    } else return ans;
+
 }
+
+
+vector<pair<int, vector<int>>> MyGraph::find22Solution(int orig, int dest, double minCapacity, int maxTranshipment) {
+    vector<bool> visited(vertexSet.size(), false);
+    vector<int> path = vector<int>();
+
+    visited[orig] = true;
+
+    vector<pair<int, vector<int>>> ans = vector<pair<int, vector<int>>>();
+
+    for (Edge e : vertexSet[orig].adj) {
+        vector<pair<int, vector<int>>> response = find22SolutionRecursiveReacher(e.dest, e.capacity, visited, path, minCapacity, maxTranshipment, dest);
+        for (int i = 0; i < response.size(); ++i) {
+            if (response[i].first != -1) {
+                ans.push_back(response[i]);
+            }
+        }
+    }
+
+    if (ans.empty()) return {};
+    else return ans;
+}
+
+

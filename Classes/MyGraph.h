@@ -60,6 +60,8 @@ class MyGraph {
 
     std::vector<Vertex> vertexSet;
 
+    std::vector<std::pair<int, std::vector<int>>> find22SolutionRecursiveReacher(int self, double capacity, std::vector<bool> visited, std::vector<int> path, double minCapacity, int maxTranshipment, int dest);
+
 
 public:
     MyGraph();
@@ -81,6 +83,8 @@ public:
     void BFS(int orig);
 
     std::vector<int> getPath(int orig, int dest);
+
+    std::vector<std::pair<int, std::vector<int>>> find22Solution(int orig, int dest, double minCapacity, int maxTranshipment);
 };
 
 
