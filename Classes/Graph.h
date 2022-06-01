@@ -9,8 +9,10 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
+#include <list>
 #include "MutablePriorityQueue.h"
 #include "Stop.h"
+#include "MaxHeap.h"
 
 template <class T> class Edge;
 template <class T> class Graph;
@@ -116,10 +118,11 @@ public:
     int getNumVertex() const;
     std::vector<Vertex<T> *> getVertexSet() const;
     int getVertexDist(int idx);
+    int getVertexIdx(Vertex<T> vert);
 
     // Single-source shortest path - Greedy
     void dijkstraShortestPath(const T &s);
-    void dijkstraHighestCapacityPath(const T &s);
+    void dijkstraHighestCapacityPath(int origin);
     void unweightedShortestPath(const T &s);
 
     // FP03B - Single-shource shortest path - Dynamic Programming - Bellman-Ford
@@ -130,6 +133,7 @@ public:
     void floydWarshallShortestPath(); //TODO...
     std::vector<T> getfloydWarshallPath(const T &origin, const T &dest) const; //TODO...
 };
+
 
 
 template <class T>
@@ -245,19 +249,26 @@ void Graph<T>::dijkstraShortestPath(const T &origin) {
 }
 
 template<class T>
-void Graph<T>::dijkstraHighestCapacityPath(const T &origin) {
-    auto s = initSingleSource(origin);
-    MutablePriorityQueue<Vertex<T>> q;
-    q.insert(s);
-    while( ! q.empty() ) {
-        auto v = q.extractMin();
-        for(auto e : v->adj) {
-            auto oldCap = e.dest->dist;
-            if (relax(v, e.dest, e.capacity)) {
-                if (oldCap == INF)
-                    q.insert(e.dest);
-                else
-                    q.decreaseKey(e.dest);
+void Graph<T>::dijkstraHighestCapacityPath(int origin) {
+    for(auto v : vertexSet) {
+        v->dist = 0;
+        v->path = nullptr;
+    }
+    auto s = findVertex(origin);
+    s->dist = INF;
+    MaxHeap<int, int> q(getNumVertex(), -1);
+
+    for (int k = 1; k < getNumVertex(); k++) {
+        q.insert(k, vertexSet[k]->dist);
+    }
+
+    while( q.getSize() > 0 ) {
+        auto v = q.removeMax().first;
+        for(auto e : vertexSet[v]->adj) {
+            if (min(vertexSet[v].dist, e->capacity) > e.dest.dist) {
+                e.dest.dist = min(vertexSet[v].dist, e->capacity);
+                e.dest->path = *vertexSet[v];
+                q.increaseKey(getVertexIdx(e.dest), e->capacity);
             }
         }
     }
@@ -329,5 +340,15 @@ int Graph<T>::getVertexDist(int idx) {
     return vertexSet[idx]->getDist();
 }
 
+template<class T>
+int Graph<T>::getVertexIdx(Vertex<T> vert) {
+    for (int j = 1; j < getNumVertex(); j++) {
+        if (vertexSet[j] == vert) {
+            return j;
+        }
+    }
+
+    return -1;
+}
 
 #endif /* GRAPH_H_ */

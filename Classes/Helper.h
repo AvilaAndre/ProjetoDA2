@@ -9,12 +9,12 @@
 #include <fstream>
 #include <iostream>
 
-#include "Graph.h"
+#include "MyGraph.h"
 
 
 class Helper {
 public:
-    void loadGraphWithData(Graph<Stop> *graphToLoad);
+    void loadGraphWithData(MyGraph *graphToLoad);
 };
 
 

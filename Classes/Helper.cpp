@@ -3,9 +3,10 @@
 //
 
 #include "Helper.h"
+#include "Stop.h"
 
 
-void Helper::loadGraphWithData(Graph<Stop> *graphToLoad) {
+void Helper::loadGraphWithData(MyGraph *graphToLoad) {
     std::vector<Stop> stops;
     std::ifstream MyReadFile("../Input/in01_b.txt");
     int first_line = 0;
@@ -16,10 +17,7 @@ void Helper::loadGraphWithData(Graph<Stop> *graphToLoad) {
                 first_line++;
                 std::string vertexs = line.substr(0, line.find(' '));
 
-                for (int i = 1; i <= stoi(vertexs); ++i) {
-                    graphToLoad->addVertex(Stop(i));
-                    //DEBUG: std::cout << "Added Stop(" << i << ")" << std::endl;
-                }
+                graphToLoad->setSize(stoi(vertexs));
             }
             else {
                 int last_space = 0;
@@ -32,7 +30,7 @@ void Helper::loadGraphWithData(Graph<Stop> *graphToLoad) {
                 std::string duration = line.substr(last_space, line.substr(last_space).find(' '));
                 //stops->emplace_back(std::stoi(origin), std::stoi(destination), std::stoi(capacity), std::stoi(duration));
                 //graph.addVertex(stops[i]);
-                graphToLoad->addEdge(Stop(stoi(origin)), Stop(stoi(destination)), std::stod(capacity), std::stod(duration));
+                graphToLoad->addEdge(stoi(origin), stoi(destination), std::stod(capacity), std::stod(duration));
                 //DEBUG: std::cout << "Connection " << origin << " with " << destination << " capacity: " << capacity << " duration: " << duration << std::endl;
             }
         }

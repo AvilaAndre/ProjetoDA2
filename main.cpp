@@ -1,17 +1,19 @@
 #include <iostream>
+#include <limits>
 
 #include "Classes/Helper.h"
 
-void Situation11(Graph<Stop> graph) {
-    graph.dijkstraShortestPath(1);
+void Situation11(MyGraph graph) {
+    //graph.dijkstraShortestPath(1);
+    graph.dijkstraHighestCapacityPath(1);
     std::cout << "Hello World!" << std::endl;
     std::cout << graph.getNumVertex() << std::endl;
     int record = 0;
     for (int i = 1; i < graph.getNumVertex(); ++i) {
-        std::cout << i << "- " << graph.getVertexDist(i) << std::endl;
-        for (auto edge: graph.getVertexSet()[i]->adj) {
-            if (edge.capacity > record) {
-                record = edge.capacity;
+        std::cout << i << "- " << graph.getVertex(i).getDist() << std::endl;
+        for (auto edge: graph.getVertexSet()[i].getAdj()) {
+            if (edge.getCapacity() > record) {
+                record = edge.getCapacity();
             }
         }
     }
@@ -32,7 +34,7 @@ int main() {
 
     while (true) {
         Helper help = Helper();
-        Graph<Stop> graph = Graph<Stop>();
+        MyGraph graph = MyGraph();
         help.loadGraphWithData(&graph);
         separator();
         std::cout << "* PRESS 0 TO QUIT" << std::endl << "*" << std::endl;
