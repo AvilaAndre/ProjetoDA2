@@ -4,7 +4,8 @@
 
 #include "Helper.h"
 #include "Stop.h"
-
+#include <queue>
+#include <cstring>
 
 void Helper::loadGraphWithData(MyGraph *graphToLoad, std::string path) {
     std::vector<Stop> stops;
@@ -42,4 +43,33 @@ void Helper::loadGraphWithData(MyGraph *graphToLoad, std::string path) {
     MyReadFile.close();
     return;
 
+}
+
+bool Helper::bfs(std::vector<std::vector<int>> rGraph, int s, int t, int parent[]){
+
+    bool visited[rGraph.size()];
+    std::memset(visited,0,sizeof(visited));
+
+    std::queue<int> queue;
+    queue.push(s);
+    visited[s]=true;
+    parent[s] = -1;
+
+    while(!queue.empty()){
+        int v = queue.front();
+        queue.pop();
+
+        for(int i = 1 ; i < rGraph.size(); i++){
+            if(!visited[i] && rGraph[v][i] > 0){
+                if(i == t){
+                    parent[i] = v;
+                    return true;
+                }
+                queue.push(i);
+                parent[i] = v;
+                visited[i] = true;
+            }
+        }
+    }
+    return false;
 }

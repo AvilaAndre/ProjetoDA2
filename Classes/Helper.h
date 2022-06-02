@@ -15,7 +15,7 @@
 class Helper {
 public:
     void loadGraphWithData(MyGraph *graphToLoad, std::string string);
+    bool bfs(std::vector<std::vector<int>> rGraph, int s, int t, int parent[]);
 };
-
 
 #endif //PROJETODA2_HELPER_H

@@ -155,7 +155,7 @@ void MyGraph::BFS(int orig) {
 
         for (auto adj: vertexSet[s].getAdj())
         {
-            if (!vertexSet[adj.getDest()].getVisited())
+            if (!vertexSet[adj.getDest()].getVisited() && adj.getCapacity() > 0)
             {
                 vertexSet[adj.getDest()].setVisited(true);
                 vertexSet[adj.getDest()].setPath(s);
@@ -164,6 +164,9 @@ void MyGraph::BFS(int orig) {
             }
         }
     }
+}
+
+void MyGraph::edmondKarp() {
 }
 
 vector<pair<int, vector<int>>> MyGraph::find22SolutionRecursiveReacher(int self, double capacity, vector<bool> visited, vector<int> path, double minCapacity, int maxTranshipment, int dest) {
@@ -230,7 +233,6 @@ vector<pair<int, vector<int>>> MyGraph::find22Solution(int orig, int dest, doubl
     else return ans;
 }
 
-//se não tiver adj
 vector<pair<double, vector<int>>> MyGraph::find22SolutionB(int orig, int dest, double minCapacity, int maxTranshipment, int answers) {
     vector<pair<double, vector<int>>> workingPaths = vector<pair<double, vector<int>>>();
 
