@@ -2,6 +2,7 @@
 #include <limits>
 #include <algorithm>
 #include <stdio.h>
+#include <deque>
 
 #include "Classes/Helper.h"
 
@@ -149,10 +150,6 @@ void Situation21(Helper helper) {
         std::cout << "creating rGraph" << std::endl;
 
         std::vector<std::vector<int>> rGraph;
-
-        //int rGraph[graph.getNumVertex()+1][graph.getNumVertex()+1];
-
-        std::cout << "rGraph resize" << std::endl;
         rGraph.resize(graph.getNumVertex() + 1);
         rGraph.emplace_back();
         rGraph[0].resize(graph.getNumVertex() + 1);
@@ -200,7 +197,6 @@ void Situation22(Helper helper) {
 void Situation23(Helper helper) {
     //----
     for (int j = 1; j < 11; ++j) {
-        std::cout << "yo" << std::endl;
         MyGraph graph = MyGraph();
         //MyGraph rGraph = MyGraph();
         std::string path = "";
@@ -227,6 +223,7 @@ void Situation23(Helper helper) {
         }
 
 
+        std::vector<std::deque<int>> encaminhamentos = {};
         int u, v;
         int parent[graph.getNumVertex()+1];
         int s = 1;
@@ -235,14 +232,15 @@ void Situation23(Helper helper) {
 
         while (helper.bfs(rGraph, s, t, parent)) {
             int path_flow = INT_MAX;
-            std::cout << std::endl;
+            std::deque<int> caminho = {};
             for (v = t; v != s; v = parent[v]) {
                 u = parent[v];
-                std::cout << "->" << u;
+                caminho.push_front(v);
                 path_flow = std::min(path_flow, rGraph[u][v]);
             }
+            caminho.push_front(s);
+            encaminhamentos.push_back(caminho);
 
-            std::cout << std::endl;
 
             for (v = t; v != s; v = parent[v]) {
                 u = parent[v];
@@ -253,7 +251,15 @@ void Situation23(Helper helper) {
             max_flow += path_flow;
         }
 
-        std::cout << max_flow << std::endl;
+        std::cout << "Maximum group dimension " << max_flow << std::endl;
+        std::cout << "Possible paths:" << std::endl;
+        for (auto road: encaminhamentos) {
+            for (int i = 0; i < road.size(); ++i) {
+                std::cout << road[i];
+                if (i != road.size()-1) std::cout << "->";
+            }
+            std::cout << std::endl;
+        }
     }
 }
 
