@@ -85,6 +85,9 @@ public:
     std::vector<int> getPath(int orig, int dest);
 
     std::vector<std::pair<int, std::vector<int>>> find22Solution(int orig, int dest, double minCapacity, int maxTranshipment);
+
+    std::vector<std::pair<double, std::vector<int>>> find22SolutionB(int orig, int dest, double minCapacity, int maxTranshipment, int answers);
+
 };
 
 

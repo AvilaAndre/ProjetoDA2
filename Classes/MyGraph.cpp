@@ -73,7 +73,7 @@ int Vertex::getID() {
 MyGraph::MyGraph() = default;
 
 void MyGraph::setSize(int size) {
-    this->vertexSet.empty();
+    this->vertexSet = vector<Vertex>();
     for (int i = 0; i <= size; ++i) {
         addVertex(i);
     }
@@ -183,11 +183,12 @@ vector<pair<int, vector<int>>> MyGraph::find22SolutionRecursiveReacher(int self,
     }
 
     path.push_back(self);
-    visited[self] = true;
     vector<pair<int, vector<int>>> ans = {};
 
     for (Edge e : vertexSet[self].adj) {
+        //std::cout << "visited: " << visited[e.dest] << std::endl;
         if (!visited[e.dest]) {
+            visited[e.dest] = true;
             vector<pair<int, vector<int>>> response = find22SolutionRecursiveReacher(e.dest, min(capacity, e.capacity), visited, path, minCapacity,
                                            maxTranshipment, dest);
             for (int i = 0; i < response.size(); ++i) {
@@ -215,6 +216,8 @@ vector<pair<int, vector<int>>> MyGraph::find22Solution(int orig, int dest, doubl
     vector<pair<int, vector<int>>> ans = vector<pair<int, vector<int>>>();
 
     for (Edge e : vertexSet[orig].adj) {
+        //std::cout << "visited: " << visited[e.dest] << std::endl;
+        visited[e.dest] = true;
         vector<pair<int, vector<int>>> response = find22SolutionRecursiveReacher(e.dest, e.capacity, visited, path, minCapacity, maxTranshipment, dest);
         for (int i = 0; i < response.size(); ++i) {
             if (response[i].first != -1) {
@@ -225,6 +228,63 @@ vector<pair<int, vector<int>>> MyGraph::find22Solution(int orig, int dest, doubl
 
     if (ans.empty()) return {};
     else return ans;
+}
+
+//se não tiver adj
+vector<pair<double, vector<int>>> MyGraph::find22SolutionB(int orig, int dest, double minCapacity, int maxTranshipment, int answers) {
+    vector<pair<double, vector<int>>> workingPaths = vector<pair<double, vector<int>>>();
+
+    vector<pair<double, vector<int>>> paths = vector<pair<double, vector<int>>>();
+
+    workingPaths.push_back({INF, {orig}});
+
+
+    while (!workingPaths.empty()) {
+        if (answers > 0 && paths.size() >= answers)
+            return paths;
+        if (vertexSet[workingPaths[0].second[workingPaths[0].second.size()-1]].adj.size() > 0) {
+            vector<Edge> adjacents = vertexSet[workingPaths[0].second[workingPaths[0].second.size()-1]].adj;
+            pair<double, vector<int>> base = workingPaths[0];
+            if (base.second.size() >= maxTranshipment+1 || base.first < minCapacity) {
+                workingPaths.erase(workingPaths.begin());
+                //std::cout << "reached maximum number of transhipments" << std:: endl;
+                continue;
+            }
+            for (int i = 0; i < adjacents.size(); ++i) {
+                if (i == adjacents.size() - 1) {
+                    if (adjacents[i].dest == dest) {
+                        base.second.push_back(adjacents[i].dest);
+                        base.first = min(base.first, adjacents[i].capacity);
+                        if (base.first >= minCapacity)
+                            paths.push_back(base);
+                        workingPaths.erase(workingPaths.begin());
+                    } else {
+                        workingPaths[0].second.push_back(adjacents[i].dest);
+                        workingPaths[0].first = min(workingPaths[0].first, adjacents[0].capacity);
+                    }
+                } else {
+                    if (adjacents[i].dest == dest) {
+                        pair<double, vector<int>> pair2add(base);
+                        pair2add.second.push_back(adjacents[i].dest);
+                        pair2add.first = min(pair2add.first, adjacents[i].capacity);
+                        if (pair2add.first >= minCapacity)
+                            paths.push_back(pair2add);
+                    } else {
+                        pair<double, vector<int>> pair2add(base);
+                        pair2add.second.push_back(adjacents[i].dest);
+                        pair2add.first = min(pair2add.first, adjacents[i].capacity);
+                        if (pair2add.first >= minCapacity)
+                            workingPaths.push_back(pair2add);
+                    }
+                }
+            }
+        }
+        else {
+            workingPaths.erase(workingPaths.begin());
+        }
+    }
+
+    return paths;
 }
 
 

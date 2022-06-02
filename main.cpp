@@ -1,5 +1,6 @@
 #include <iostream>
 #include <limits>
+#include <algorithm>
 
 #include "Classes/Helper.h"
 
@@ -29,7 +30,7 @@ void Situation11(Helper helper) {
 
 
 void Situation12(Helper helper) {
-    for (int j = 1; j < 11; ++j) {
+    for (int j = 0; j < 11; ++j) {
         MyGraph graph = MyGraph();
         std::string path = "";
         if (j < 10)
@@ -70,15 +71,30 @@ void Situation12(Helper helper) {
         minCapacity = (double) record;
         minTranshipment = roadPathB.size();
 
-        std::cout << "Minumum capacity: " << minCapacity << " Maximum capacity: " << maxCapacity << " Minimum Transhipments: " << minTranshipment << " Maximum Transhipments: " << maxTranshipment << std::endl;
+        std::cout << "Minimum capacity: " << minCapacity << " Maximum capacity: " << maxCapacity << " Minimum Transhipments: " << minTranshipment << " Maximum Transhipments: " << maxTranshipment << std::endl;
 
         if (minCapacity == maxCapacity && minTranshipment == maxTranshipment) {
             std::cout << "Found an optimal solution!" << std::endl << std::endl;
-            continue;
+            //continue;
+        }
+
+        std::vector<std::pair<double, std::vector<int>>> paretos = graph.find22SolutionB(1, graph.getNumVertex(), minCapacity, maxTranshipment, 100);
+
+        std::cout << "size: " << paretos.size() << std::endl;
+
+        for (int k = 0; k < paretos.size(); ++k) {
+            std::cout << k+1 << " - " << paretos[k].first << " - Path: ";
+            for (int i = 0; i < paretos[k].second.size(); ++i) {
+                std::cout << paretos[k].second[i];
+                if (i != paretos[k].second.size()-1) std::cout << "->";
+            }
+            std::cout << std::endl;
         }
 
         /*
-        std::vector<std::pair<int, std::vector<int>>> paretos = graph.find22Solution(1, graph.getNumVertex(), minCapacity, maxTranshipment);
+        std::sort( paretos.begin(), paretos.end() );
+        paretos.erase( std::unique( paretos.begin(), paretos.end() ), paretos.end() );
+
 
         std::cout << "size: " << paretos.size() << std::endl;
 
@@ -91,7 +107,8 @@ void Situation12(Helper helper) {
             }
             std::cout << std::endl;
         }
-        */
+         */
+
 
         std::cout << std::endl;
 
@@ -99,6 +116,28 @@ void Situation12(Helper helper) {
     }
 }
 
+
+void Situation22(Helper helper) {
+    for (int j = 1; j < 11; ++j) {
+        MyGraph graph = MyGraph();
+        std::string path = "";
+        if (j < 10)
+            path = "in0" + std::to_string(j) + "_b";
+        else
+            path = "in" + std::to_string(j) + "_b";
+        helper.loadGraphWithData(&graph, path);
+        graph.dijkstraHighestCapacityPath(1);
+        std::vector<int> roadPath = graph.getPath(1, graph.getNumVertex());
+        std::cout << "Path: ";
+        for (int i = 0; i < roadPath.size(); ++i) {
+            std::cout << i;
+            if (i != roadPath.size()-1) std::cout << "->";
+        }
+        std::cout << std::endl;
+
+        std::cout << "(" << j << ") Record: " << graph.getVertex(graph.getNumVertex()).getDist() << std::endl; //TODO: Perguntar ao user qual o que ele quer ver :)
+    }
+}
 
 void separator() {
     std::cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << std::endl;
@@ -132,6 +171,9 @@ int main() {
                 Situation12(help);
                 break;
             case 3 :
+                break;
+            case 4:
+                Situation22(help);
                 break;
             case 0 :
                 separator();
