@@ -99,6 +99,9 @@ void Situation12(Helper helper) {
     }
 }
 
+void Situation21(/*Graph<Stop> graph*/) {
+    std::cout << "Exercise 2.1" << std::endl;
+}
 
 void separator() {
     std::cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << std::endl;
@@ -110,6 +113,7 @@ int main() {
     while (true) {
         Helper help = Helper();
         separator();
+        std::cout << "* Situations: 11, 12, 21, 22, 23, 24, 25" << std::endl;
         std::cout << "* PRESS 0 TO QUIT" << std::endl << "*" << std::endl;
         std::cout << "* Situation:";
         std::cin >> n;
@@ -124,14 +128,28 @@ int main() {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
         }
+
         switch (n) {
-            case 1:
+            case 11:
                 Situation11(help);
                 break;
-            case 2 :
+            case 12 :
                 Situation12(help);
                 break;
-            case 3 :
+            case 21 :
+                Situation21(/*graph*/);
+                break;
+            case 22 :
+                //Situation22(/*graph*/);
+                break;
+            case 23 :
+                //Situation23(/*graph*/);
+                break;
+            case 24 :
+                //Situation24(/*graph*/);
+                break;
+            case 25 :
+                //Situation25(/*graph*/);
                 break;
             case 0 :
                 separator();
