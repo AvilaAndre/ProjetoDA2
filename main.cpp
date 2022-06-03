@@ -204,6 +204,9 @@ void Situation23(Helper helper) {
             path = "in0" + std::to_string(j) + "_b";
         else
             path = "in" + std::to_string(j) + "_b";
+
+
+        std::cout << "CASE " << j << std::endl;
         helper.loadGraphWithData(&graph, path);
 
 
