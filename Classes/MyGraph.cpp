@@ -166,8 +166,6 @@ void MyGraph::BFS(int orig) {
     }
 }
 
-void MyGraph::edmondKarp() {
-}
 
 vector<pair<int, vector<int>>> MyGraph::find22SolutionRecursiveReacher(int self, double capacity, vector<bool> visited, vector<int> path, double minCapacity, int maxTranshipment, int dest) {
     //std::cout << "New branch!" << self << std::endl;

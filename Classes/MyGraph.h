@@ -82,8 +82,6 @@ public:
 
     void BFS(int orig);
 
-    void edmondKarp();
-
     std::vector<int> getPath(int orig, int dest);
 
     std::vector<std::pair<int, std::vector<int>>> find22Solution(int orig, int dest, double minCapacity, int maxTranshipment);
