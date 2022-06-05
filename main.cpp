@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <stdio.h>
 #include <deque>
+#include <queue>
 
 #include "Classes/Helper.h"
 
@@ -281,6 +282,126 @@ void Situation23(Helper helper) {
     }
 }
 
+void Situation24(Helper helper) {
+    for (int j = 0; j < 11; ++j) {
+        MyGraph graph = MyGraph();
+        //MyGraph rGraph = MyGraph();
+        std::string path = "";
+        if (j < 10)
+            path = "in0" + std::to_string(j) + "_b";
+        else
+            path = "in" + std::to_string(j) + "_b";
+
+
+        std::cout << "CASE " << j << std::endl;
+        helper.loadGraphWithData(&graph, path);
+
+
+        std::vector<std::vector<int>> rGraph;
+
+        rGraph.resize(graph.getNumVertex()+1);
+        rGraph[0].resize(graph.getNumVertex()+1);
+
+        for (int i = 1; i < graph.getNumVertex()+1; ++i) {
+            rGraph[i].resize(graph.getNumVertex()+1);
+            for (int k = 1; k < graph.getNumVertex()+1; ++k) {
+                rGraph[i][k] = 0;
+            }
+            for (int k = 0 ; k < graph.getVertex(i).getAdj().size(); ++k) {
+                rGraph[i][graph.getVertex(i).getAdj()[k].getDest()] = (int) graph.getVertex(i).getAdj()[k].getCapacity();
+            }
+        }
+
+        std::pair<double, std::vector<double>> ans1 = helper.earliestStart(graph);
+
+
+        std::cout << "The group would meet again at the destination after " << ans1.first << " hours, minimum." << std::endl;
+    }
+}
+
+void Situation25(Helper helper) {
+    for (int j = 0; j < 11; ++j) {
+        MyGraph graph = MyGraph();
+        //MyGraph rGraph = MyGraph();
+        std::string path = "";
+        if (j < 10)
+            path = "in0" + std::to_string(j) + "_b";
+        else
+            path = "in" + std::to_string(j) + "_b";
+
+
+        std::cout << "CASE " << j << std::endl;
+        helper.loadGraphWithData(&graph, path);
+
+
+        std::vector<std::vector<int>> rGraph;
+
+        rGraph.resize(graph.getNumVertex()+1);
+        rGraph[0].resize(graph.getNumVertex()+1);
+
+        for (int i = 1; i < graph.getNumVertex()+1; ++i) {
+            rGraph[i].resize(graph.getNumVertex()+1);
+            for (int k = 1; k < graph.getNumVertex()+1; ++k) {
+                rGraph[i][k] = 0;
+            }
+            for (int k = 0 ; k < graph.getVertex(i).getAdj().size(); ++k) {
+                rGraph[i][graph.getVertex(i).getAdj()[k].getDest()] = (int) graph.getVertex(i).getAdj()[k].getCapacity();
+            }
+        }
+
+        std::pair<double, std::vector<double>> ans1 = helper.earliestStart(graph);
+
+
+        std::vector<double> ans2 = helper.latestFinish(graph, ans1.first);
+
+        /*
+        for (int u = 1; u< graph.getNumVertex()+1; u++) {
+            std::cout << "ES[" << u << "] " << ans1.second[u] << " LF[" << u << "] "<< ans2[u] << std::endl;
+        }
+
+
+        for (int i = 1; i < graph.getNumVertex() + 1; ++i) {
+            for (Edge e: graph.getVertex(i).getAdj()) {
+                double es = ans1.second[i];
+                double lf = ans2[e.getDest()];
+                double ls = lf - e.getDuration();
+                double ft = ls - es;
+                double fl = ans1.second[e.getDest()] - es - e.getDuration();
+                std::cout << i << "->" << e.getDest();
+                std::cout << " ES " << es;
+                std::cout << " LF "<< lf;
+                std::cout << " LS " << ls;
+                std::cout << " FT " << ft;
+                std::cout << " FL " << fl;
+                std::cout << std::endl;
+            }
+        }
+
+        */
+
+        double biggestFT = 0;
+        std::vector<int> waitingPlaces = {};
+
+        for (int i = 1; i < graph.getNumVertex() + 1; ++i) {
+            for (Edge e: graph.getVertex(i).getAdj()) {
+                double ft = ans2[e.getDest()] - e.getDuration() - ans1.second[i];
+                if (ft > biggestFT) {
+                    biggestFT = ft;
+                    waitingPlaces = {i};
+                } else if (ft == biggestFT) {
+                    waitingPlaces.push_back(i);
+                }
+            }
+        }
+
+        std::cout << "The largest amount of time someone will need to wait is " << biggestFT << " hours." << std::endl;
+        std::cout << "The waiting will be done in nodes ";
+        for (int no: waitingPlaces)
+            std::cout << no << " ";
+        std::cout << "." << std::endl;
+    }
+}
+
 void separator() {
     std::cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << std::endl;
 }
@@ -324,10 +445,10 @@ int main() {
                 Situation23(help);
                 break;
             case 24 :
-                //Situation24(/*graph*/);
+                Situation24(help);
                 break;
             case 25 :
-                //Situation25(/*graph*/);
+                Situation25(help);
                 break;
             case 4:
                 Situation22(help);
