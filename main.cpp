@@ -107,7 +107,7 @@ void Situation21(Helper helper) {
     std::cin >> graph_number;
 
     int dimension;
-    std::cout << "What dimension do you pretend? ";
+    std::cout << "What dimension do you want? ";
     std::cin >> dimension;
 
     MyGraph graph = MyGraph();
