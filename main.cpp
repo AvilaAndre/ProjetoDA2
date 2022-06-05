@@ -97,78 +97,93 @@ void Situation12(Helper helper) {
     }
 }
 
-//mariana 2.1 tentativa -------------------------------------------------------------------
-int fordFulkerson(Helper helper, std::vector<std::vector<int>> graph, int s, int t) {
-
-    int V = graph.size();
-
-    //residual graph
-    std::vector<std::vector<int>> rGraph;
-
-    for (int i = 1; i < V; i++) {
-        for (int j = 1; j < V; j++) {
-            rGraph[i][j] = graph[i][j];
-        }
-    }
-    int parent[V];
-
-    int max_flow = 0;
-
-    while (helper.bfs(rGraph, s, t, parent)) {
-        int path_flow = INT_MAX;
-
-        for (int n = t; n != s; n = parent[n]) {
-            int m = parent[n];
-            path_flow = std::min(path_flow, rGraph[m][n]);
-        }
-
-        for (int n = t; n != s; n = parent[n]) {
-            int m = parent[n];
-            rGraph[m][n] -= path_flow;
-            rGraph[n][m] += path_flow;
-        }
-
-        max_flow += path_flow;
-    }
-
-    return max_flow;
-}
-
 void Situation21(Helper helper) {
 
-    std::cout << "Exercise 2.1" << std::endl;
-    for (int j = 1; j < 11; ++j) {
-        MyGraph graph = MyGraph();
-        //MyGraph rGraph = MyGraph();
-        std::string path = "";
-        if (j < 10)
-            path = "in0" + std::to_string(j) + "_b";
-        else
-            path = "in" + std::to_string(j) + "_b";
-        helper.loadGraphWithData(&graph, path);
+    std::cout << "* Exercise 2.1" << std::endl;
 
-        std::cout << "creating rGraph" << std::endl;
+    int graph_number;
+    std::cout << "What graph do you want to use? (number 1-10)" << std::endl;
+    std::cin >> graph_number;
 
-        std::vector<std::vector<int>> rGraph;
-        rGraph.resize(graph.getNumVertex() + 1);
-        rGraph.emplace_back();
-        rGraph[0].resize(graph.getNumVertex() + 1);
+    int dimension;
+    std::cout << "What dimension do you pretend? ";
+    std::cin >> dimension;
 
-        std::cout << "creating rGraph for loop" << std::endl;
-        for (int i = 1; i < graph.getNumVertex() + 1; ++i) {
-            rGraph[i].resize(graph.getNumVertex() + 1);
-            for (int k = 1; k < graph.getNumVertex() + 1; ++k) {
-                rGraph[i][k] = 0;
-            }
-            for (int k = 1; k < graph.getVertex(i).getAdj().size(); ++k) {
-                rGraph[i][graph.getVertex(i).getAdj()[k].getDest()] = (int) graph.getVertex(
-                        i).getAdj()[k].getCapacity();
+    MyGraph graph = MyGraph();
+    //MyGraph rGraph = MyGraph();
+    std::string path = "";
+    if (graph_number < 10)
+        path = "in0" + std::to_string(graph_number) + "_b";
+    else
+        path = "in" + std::to_string(graph_number) + "_b";
+
+    std::cout << "CASE " << graph_number << std::endl;
+    helper.loadGraphWithData(&graph, path);
+
+    std::vector<std::vector<int>> rGraph;
+    rGraph.resize(graph.getNumVertex()+1);
+    rGraph[0].resize(graph.getNumVertex()+1);
+
+    for (int i = 1; i < graph.getNumVertex()+1; ++i) {
+        rGraph[i].resize(graph.getNumVertex()+1);
+        for (int k = 1; k < graph.getNumVertex()+1; ++k) {
+            rGraph[i][k] = 0;
+        }
+        for (int k = 0 ; k < graph.getVertex(i).getAdj().size(); ++k) {
+            rGraph[i][graph.getVertex(i).getAdj()[k].getDest()] = (int) graph.getVertex(i).getAdj()[k].getCapacity();
+        }
+    }
+
+    std::vector<std::deque<int>> encaminhamentos = {};
+    int u, v;
+    int parent[graph.getNumVertex()+1];
+    int s = 1;
+    int t = graph.getNumVertex();
+
+    while (helper.bfs(rGraph, s, t, parent)) {
+        std::deque<int> caminho = {};
+        int minCap = INT_MAX;
+        for (v = t; v != s; v = parent[v]) {
+            u = parent[v];
+            //std::cout << "dimension\t" << dimension <<"\trGraph\t" << rGraph[u][v] << "\n";
+            caminho.push_front(v);
+            if (minCap > rGraph[u][v]) {
+                minCap = rGraph[u][v];
             }
         }
-        std::cout << "The maximum possible flow is " << fordFulkerson(helper, rGraph, 0, 5);
+
+        caminho.push_front(s);
+        encaminhamentos.push_back(caminho);
+
+        if (minCap < dimension) {
+            dimension -= minCap;
+        } else {
+            dimension = 0;
+            break;
+        }
+
+        for (v = t; v != s; v = parent[v]) {
+            u = parent[v];
+            rGraph[u][v] -= minCap;
+            rGraph[v][u] += minCap;
+        }
+
     }
+
+    if (dimension == 0) {
+        std::cout << "Possible paths:" << std::endl;
+        for (auto road: encaminhamentos) {
+            for (int i = 0; i < road.size(); ++i) {
+                std::cout << road[i];
+                if (i != road.size()-1) std::cout << "->";
+            }
+            std::cout << std::endl;
+        }
+    } else {
+        std::cout << "There are no possible paths for this dimension of people\n";
+    }
+
 }
-//mariana 2.1 FIM tentativa ---------------------------------------------------------------
 
 void Situation22(Helper helper) {
     for (int j = 1; j < 11; ++j) {
