@@ -117,6 +117,40 @@ void path_printer(std::vector<std::deque<int>> *encaminhamentos) {
     }
 }
 
+bool path_finder(std::vector<std::vector<int>> &rGraph, int &s, int &t, int parent[],
+                 int &u, int &v, std::vector<std::deque<int>> &encaminhamentos,
+                 int &dimension, int &extra) {
+
+    std::deque<int> caminho = {};
+    int minCap = INT_MAX;
+    for (v = t; v != s; v = parent[v]) {
+        u = parent[v];
+        //std::cout << "dimension\t" << dimension <<"\trGraph\t" << rGraph[u][v] << "\n";
+        caminho.push_front(v);
+        if (minCap > rGraph[u][v]) {
+            minCap = rGraph[u][v];
+        }
+    }
+
+    caminho.push_front(s);
+    encaminhamentos.push_back(caminho);
+
+    for (v = t; v != s; v = parent[v]) {
+        u = parent[v];
+        rGraph[u][v] -= minCap;
+        rGraph[v][u] += minCap;
+    }
+
+    if (minCap < dimension) {
+        dimension -= minCap;
+        return true;
+    } else {
+        extra = minCap - dimension;
+        dimension = 0;
+        return false;
+    }
+}
+
 void Situation21(Helper helper) {
     std::cout << "* Exercise 2.1" << std::endl;
 
@@ -156,36 +190,11 @@ void Situation21(Helper helper) {
     int s = 1;
     int t = graph.getNumVertex();
     int extra = 0; //free capacity
+    bool peopleToGo = true;
 
-    while (helper.bfs(rGraph, s, t, parent)) {
-        std::deque<int> caminho = {};
-        int minCap = INT_MAX;
-        for (v = t; v != s; v = parent[v]) {
-            u = parent[v];
-            //std::cout << "dimension\t" << dimension <<"\trGraph\t" << rGraph[u][v] << "\n";
-            caminho.push_front(v);
-            if (minCap > rGraph[u][v]) {
-                minCap = rGraph[u][v];
-            }
-        }
-
-        caminho.push_front(s);
-        encaminhamentos.push_back(caminho);
-
-        for (v = t; v != s; v = parent[v]) {
-            u = parent[v];
-            rGraph[u][v] -= minCap;
-            rGraph[v][u] += minCap;
-        }
-
-        if (minCap < dimension) {
-            dimension -= minCap;
-        } else {
-            extra = minCap - dimension;
-            dimension = 0;
-            break;
-        }
-
+    while (helper.bfs(rGraph, s, t, parent) && peopleToGo) {
+        peopleToGo = path_finder(rGraph, s, t, parent,
+                    u, v, encaminhamentos, dimension, extra);
     }
 
     if (dimension == 0) {
@@ -215,33 +224,10 @@ void Situation21(Helper helper) {
                     path_printer(&encaminhamentos);
                 } else {
                     add -= extra;
-                    while (helper.bfs(rGraph, s, t, parent)) {
-                        std::deque<int> caminho = {};
-                        int minCap = INT_MAX;
-                        for (v = t; v != s; v = parent[v]) {
-                            u = parent[v];
-                            caminho.push_front(v);
-                            if (minCap > rGraph[u][v]) {
-                                minCap = rGraph[u][v];
-                            }
-                        }
-
-                        caminho.push_front(s);
-                        encaminhamentos.push_back(caminho);
-
-                        for (v = t; v != s; v = parent[v]) {
-                            u = parent[v];
-                            rGraph[u][v] -= minCap;
-                            rGraph[v][u] += minCap;
-                        }
-
-                        if (minCap < add) {
-                            add -= minCap;
-                        } else {
-                            extra = minCap - add;
-                            add = 0;
-                            break;
-                        }
+                    peopleToGo = true;
+                    while (helper.bfs(rGraph, s, t, parent) && peopleToGo) {
+                        peopleToGo = path_finder(rGraph, s, t, parent,
+                                                 u, v, encaminhamentos, add, extra);
                     }
                     if (add == 0) {
                         std::cout << "Possible paths:" << std::endl;
