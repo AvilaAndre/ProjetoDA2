@@ -107,7 +107,15 @@ void Situation12(Helper helper) {
     }
 }
 
-
+void path_printer(std::vector<std::deque<int>> *encaminhamentos) {
+    for (auto road: *encaminhamentos) {
+        for (int i = 0; i < road.size(); ++i) {
+            std::cout << road[i];
+            if (i != road.size()-1) std::cout << "->";
+        }
+        std::cout << std::endl;
+    }
+}
 
 void Situation21(Helper helper) {
     std::cout << "* Exercise 2.1" << std::endl;
@@ -182,13 +190,7 @@ void Situation21(Helper helper) {
 
     if (dimension == 0) {
         std::cout << "Possible paths:" << std::endl;
-        for (auto road: encaminhamentos) {
-            for (int i = 0; i < road.size(); ++i) {
-                std::cout << road[i];
-                if (i != road.size()-1) std::cout << "->";
-            }
-            std::cout << std::endl;
-        }
+        path_printer(&encaminhamentos);
     } else {
         std::cout << "There are no possible paths for this dimension of people\n";
     }
@@ -210,13 +212,7 @@ void Situation21(Helper helper) {
                 std::cin >> add;
                 if (add <= extra) {
                     std::cout << "The paths are the same: " << std::endl;
-                    for (auto road: encaminhamentos) {
-                        for (int i = 0; i < road.size(); ++i) {
-                            std::cout << road[i];
-                            if (i != road.size()-1) std::cout << "->";
-                        }
-                        std::cout << std::endl;
-                    }
+                    path_printer(&encaminhamentos);
                 } else {
                     add -= extra;
                     while (helper.bfs(rGraph, s, t, parent)) {
@@ -249,13 +245,7 @@ void Situation21(Helper helper) {
                     }
                     if (add == 0) {
                         std::cout << "Possible paths:" << std::endl;
-                        for (auto road: encaminhamentos) {
-                            for (int i = 0; i < road.size(); ++i) {
-                                std::cout << road[i];
-                                if (i != road.size()-1) std::cout << "->";
-                            }
-                            std::cout << std::endl;
-                        }
+                        path_printer(&encaminhamentos);
                     } else {
                         std::cout << "There are no possible paths for this many people!\n";
                     }
