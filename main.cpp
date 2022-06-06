@@ -159,7 +159,7 @@ void Situation21(Helper helper) {
     std::cin >> graph_number;
 
     int dimension;
-    std::cout << "What dimension do you want? ";
+    std::cout << "What dimension do you want?";
     std::cin >> dimension;
 
     MyGraph graph = MyGraph();
@@ -202,6 +202,7 @@ void Situation21(Helper helper) {
         path_printer(&encaminhamentos);
     } else {
         std::cout << "There are no possible paths for this dimension of people\n";
+        return;
     }
 
     //Exercise 2.2
@@ -215,7 +216,6 @@ void Situation21(Helper helper) {
 
         switch (user_answer) {
             case 'y':
-                //TODO
                 int add;
                 std::cout << "How many people do you want to add to the group?" << std::endl;
                 std::cin >> add;
