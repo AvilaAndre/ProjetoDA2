@@ -1,0 +1,85 @@
+\hypertarget{class_helper}{}\doxysection{Helper Class Reference}
+\label{class_helper}\index{Helper@{Helper}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_helper_a6475b1cd601e0ba6d5f352be359da978}{load\+Graph\+With\+Data}} (\mbox{\hyperlink{class_my_graph}{My\+Graph}} $\ast$graph\+To\+Load, std\+::string string)
+\item 
+bool \mbox{\hyperlink{class_helper_ae79803043acfc6cc5e0ba2b7ab46d3d4}{bfs}} (std\+::vector$<$ std\+::vector$<$ int $>$ $>$ r\+Graph, int s, int t, int parent\mbox{[}$\,$\mbox{]})
+\item 
+std\+::pair$<$ double, std\+::vector$<$ double $>$ $>$ \mbox{\hyperlink{class_helper_a699666409af5ea4a607dcf655ddfab3a}{earliest\+Start}} (\mbox{\hyperlink{class_my_graph}{My\+Graph}} graph)
+\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{class_helper_aa2d0e040e14d612f51931e00ed1cc1ba}{latest\+Finish}} (\mbox{\hyperlink{class_my_graph}{My\+Graph}} graph, double dur\+Min)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_helper_ae79803043acfc6cc5e0ba2b7ab46d3d4}\label{class_helper_ae79803043acfc6cc5e0ba2b7ab46d3d4}} 
+\index{Helper@{Helper}!bfs@{bfs}}
+\index{bfs@{bfs}!Helper@{Helper}}
+\doxysubsubsection{\texorpdfstring{bfs()}{bfs()}}
+{\footnotesize\ttfamily bool Helper\+::bfs (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ int $>$ $>$}]{r\+Graph,  }\item[{int}]{s,  }\item[{int}]{t,  }\item[{int}]{parent\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Performs a bfs, made specifically for the Edmond-\/\+Karp algorithm. 
+\begin{DoxyParams}{Parameters}
+{\em r\+Graph} & a matrix graph. \\
+\hline
+{\em s} & the starting point (start). \\
+\hline
+{\em t} & the finishing point (target). \\
+\hline
+{\em parent} & an array with the parents of each node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+if a path to the target has been achieved. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_helper_a699666409af5ea4a607dcf655ddfab3a}\label{class_helper_a699666409af5ea4a607dcf655ddfab3a}} 
+\index{Helper@{Helper}!earliestStart@{earliestStart}}
+\index{earliestStart@{earliestStart}!Helper@{Helper}}
+\doxysubsubsection{\texorpdfstring{earliestStart()}{earliestStart()}}
+{\footnotesize\ttfamily std\+::pair$<$ double, std\+::vector$<$ double $>$ $>$ Helper\+::earliest\+Start (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_my_graph}{My\+Graph}}}]{graph }\end{DoxyParamCaption})}
+
+Performs the critical path\textquotesingle{}s earliest start algorithm. 
+\begin{DoxyParams}{Parameters}
+{\em graph} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the minimum duration and the earliest start for each node in a pair. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_helper_aa2d0e040e14d612f51931e00ed1cc1ba}\label{class_helper_aa2d0e040e14d612f51931e00ed1cc1ba}} 
+\index{Helper@{Helper}!latestFinish@{latestFinish}}
+\index{latestFinish@{latestFinish}!Helper@{Helper}}
+\doxysubsubsection{\texorpdfstring{latestFinish()}{latestFinish()}}
+{\footnotesize\ttfamily std\+::vector$<$ double $>$ Helper\+::latest\+Finish (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_my_graph}{My\+Graph}}}]{graph,  }\item[{double}]{dur\+Min }\end{DoxyParamCaption})}
+
+Performs the critical path\textquotesingle{}s latest finish algorithm. 
+\begin{DoxyParams}{Parameters}
+{\em graph} & \\
+\hline
+{\em dur\+Min} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the earliest start for each node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_helper_a6475b1cd601e0ba6d5f352be359da978}\label{class_helper_a6475b1cd601e0ba6d5f352be359da978}} 
+\index{Helper@{Helper}!loadGraphWithData@{loadGraphWithData}}
+\index{loadGraphWithData@{loadGraphWithData}!Helper@{Helper}}
+\doxysubsubsection{\texorpdfstring{loadGraphWithData()}{loadGraphWithData()}}
+{\footnotesize\ttfamily void Helper\+::load\+Graph\+With\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_my_graph}{My\+Graph}} $\ast$}]{graph\+To\+Load,  }\item[{std\+::string}]{string }\end{DoxyParamCaption})}
+
+This functions reads a text file on path \char`\"{}string\char`\"{} and fills the \char`\"{}graph\+To\+Load\char`\"{} with data. 
+\begin{DoxyParams}{Parameters}
+{\em graph\+To\+Load} & \\
+\hline
+{\em string} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/Helper.\+h\item 
+Classes/Helper.\+cpp\end{DoxyCompactItemize}

@@ -1,14 +1,8 @@
-//
-// Created by asus on 20/05/2022.
-//
-
 #include "Helper.h"
-#include "Stop.h"
 #include <queue>
 #include <cstring>
 
 void Helper::loadGraphWithData(MyGraph *graphToLoad, std::string path) {
-    std::vector<Stop> stops;
     std::ifstream MyReadFile("../Input/" + path +".txt");
     int first_line = 0;
     if (MyReadFile.is_open()) {
@@ -29,8 +23,6 @@ void Helper::loadGraphWithData(MyGraph *graphToLoad, std::string path) {
                 std::string capacity = line.substr(last_space, line.substr(last_space).find(' '));
                 last_space = last_space + 1 + line.substr(last_space).find(' ');
                 std::string duration = line.substr(last_space, line.substr(last_space).find(' '));
-                //stops->emplace_back(std::stoi(origin), std::stoi(destination), std::stoi(capacity), std::stoi(duration));
-                //graph.addVertex(stops[i]);
                 graphToLoad->addEdge(stoi(origin), stoi(destination), std::stod(capacity), std::stod(duration));
                 //DEBUG: std::cout << "Connection " << origin << " with " << destination << " capacity: " << capacity << " duration: " << duration << std::endl;
             }
@@ -147,7 +139,7 @@ std::pair<double, std::vector<double>>  Helper::earliestStart(MyGraph graph) {
     }
 
     /*
-     * std::cout << "Minimum duration " << minDur << std::endl;
+      std::cout << "Minimum duration " << minDur << std::endl;
 
     for (int u = 1; u< graph.getNumVertex()+1; u++) {
         std::cout << "ES[" << u << "] " << wait[u] << " Prec[" << u << "] "<< pred[u] << std::endl;
@@ -158,7 +150,7 @@ std::pair<double, std::vector<double>>  Helper::earliestStart(MyGraph graph) {
 }
 
 std::vector<double> Helper::latestFinish(MyGraph graph, double durMin) {
-    //-------EARLIEST START--------//
+    //-------LATEST FINISH--------//
     //inicializar os vetores com dados.
 
     std::vector<std::vector<double>> graphT = std::vector<std::vector<double>>(); //Grafo transposto

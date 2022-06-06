@@ -1,0 +1,52 @@
+\hypertarget{class_graph}{}\doxysection{Graph\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_graph}\index{Graph$<$ T $>$@{Graph$<$ T $>$}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_a8b7b7465fbfd562e2a469f90a437ab75}\label{class_graph_a8b7b7465fbfd562e2a469f90a437ab75}} 
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ $\ast$ {\bfseries find\+Vertex} (const T \&in) const
+\item 
+\mbox{\Hypertarget{class_graph_a00be284ea2be3b3d0f0d2e493b70245b}\label{class_graph_a00be284ea2be3b3d0f0d2e493b70245b}} 
+bool {\bfseries add\+Vertex} (const T \&in)
+\item 
+\mbox{\Hypertarget{class_graph_af2793d9c17ae827f6ea544dde40fedd2}\label{class_graph_af2793d9c17ae827f6ea544dde40fedd2}} 
+bool {\bfseries add\+Edge} (const T \&sourc, const T \&dest, double c, double d)
+\item 
+\mbox{\Hypertarget{class_graph_a0853eac15cdf0f06d63f4b8a7820ec71}\label{class_graph_a0853eac15cdf0f06d63f4b8a7820ec71}} 
+int {\bfseries get\+Num\+Vertex} () const
+\item 
+\mbox{\Hypertarget{class_graph_a41624b03fcb6bd29e4df574a1ec58541}\label{class_graph_a41624b03fcb6bd29e4df574a1ec58541}} 
+std\+::vector$<$ \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ $\ast$ $>$ {\bfseries get\+Vertex\+Set} () const
+\item 
+\mbox{\Hypertarget{class_graph_a91b6c19c9c5a2d57651fcd66c342c8e3}\label{class_graph_a91b6c19c9c5a2d57651fcd66c342c8e3}} 
+int {\bfseries get\+Vertex\+Dist} (int idx)
+\item 
+\mbox{\Hypertarget{class_graph_a402442a9a955e0f0350f187f812123f7}\label{class_graph_a402442a9a955e0f0350f187f812123f7}} 
+int {\bfseries get\+Vertex\+Idx} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ vert)
+\item 
+\mbox{\Hypertarget{class_graph_a445a38cf4045797198eae2b818b602de}\label{class_graph_a445a38cf4045797198eae2b818b602de}} 
+void {\bfseries dijkstra\+Shortest\+Path} (const T \&s)
+\item 
+\mbox{\Hypertarget{class_graph_afff9d90e8bccaef890c9af84d6c9e947}\label{class_graph_afff9d90e8bccaef890c9af84d6c9e947}} 
+void {\bfseries dijkstra\+Highest\+Capacity\+Path} (int origin)
+\item 
+\mbox{\Hypertarget{class_graph_aa033b71894f347b9050e1c547fb48b72}\label{class_graph_aa033b71894f347b9050e1c547fb48b72}} 
+void {\bfseries unweighted\+Shortest\+Path} (const T \&s)
+\item 
+\mbox{\Hypertarget{class_graph_a1d6769b79beaa76f78fd9c9209833bef}\label{class_graph_a1d6769b79beaa76f78fd9c9209833bef}} 
+void {\bfseries bellman\+Ford\+Shortest\+Path} (const T \&s)
+\item 
+\mbox{\Hypertarget{class_graph_ad9b10f45166faaa19879fca4e73b6f40}\label{class_graph_ad9b10f45166faaa19879fca4e73b6f40}} 
+std\+::vector$<$ T $>$ {\bfseries get\+Path} (const T \&origin, const T \&dest) const
+\item 
+\mbox{\Hypertarget{class_graph_ae5161f4408bf1ead2b29d19d67fb04ee}\label{class_graph_ae5161f4408bf1ead2b29d19d67fb04ee}} 
+void {\bfseries floyd\+Warshall\+Shortest\+Path} ()
+\item 
+\mbox{\Hypertarget{class_graph_ace531664e93db533d1bcaf532b97348e}\label{class_graph_ace531664e93db533d1bcaf532b97348e}} 
+std\+::vector$<$ T $>$ {\bfseries getfloyd\+Warshall\+Path} (const T \&origin, const T \&dest) const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Classes/Graph.\+h\end{DoxyCompactItemize}

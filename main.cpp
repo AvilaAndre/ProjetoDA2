@@ -158,17 +158,43 @@ void Situation21(Helper helper) {
     std::cout << "What graph do you want to use? (number 1-10)" << std::endl;
     std::cin >> graph_number;
 
-    int dimension;
-    std::cout << "What dimension do you want?";
-    std::cin >> dimension;
-
     MyGraph graph = MyGraph();
 
     std::string path = "";
     buildPath(&path, graph_number);
 
-    std::cout << "CASE " << graph_number << std::endl;
     helper.loadGraphWithData(&graph, path);
+
+    int dimension;
+    std::cout << "What dimension do you want? (1-" << graph.getNumVertex() << ")";
+    std::cin >> dimension;
+
+    int s = graph.getNumVertex();
+
+    std::cout << "Finishing point: (1-" << graph.getNumVertex() << ")";
+    std::cin >> s;
+
+    while (s < 1 || s > graph.getNumVertex()) {
+        std::cout << "Starting point: (1-" << graph.getNumVertex() << ")";
+        std::cin >> s;
+    }
+
+    int t = graph.getNumVertex();
+
+    std::cout << "Finishing point: (1-" << graph.getNumVertex() << ")";
+    std::cin >> t;
+
+    while (t < 1 || t > graph.getNumVertex()) {
+        std::cout << "What dimension do you want? (1-" << graph.getNumVertex() << ")";
+        std::cin >> t;
+    }
+
+    if (s == t) {
+        std::cout << "Starting point and finishing point can not be the same." << std::endl;
+        return;
+    }
+
+    std::cout << "CASE " << graph_number << std::endl;
 
     std::vector<std::vector<int>> rGraph;
     rGraph.resize(graph.getNumVertex()+1);
@@ -187,8 +213,6 @@ void Situation21(Helper helper) {
     std::vector<std::deque<int>> encaminhamentos = {};
     int u, v;
     int parent[graph.getNumVertex()+1];
-    int s = 1;
-    int t = graph.getNumVertex();
     int extra = 0; //free capacity
     bool peopleToGo = true;
 
@@ -253,7 +277,7 @@ void Situation21(Helper helper) {
 void Situation23(Helper helper) {
     std::cout << "* Exercise 2.3" << std::endl;
 
-    for (int j = 1; j < 11; ++j) {
+    for (int j = 9; j < 11; ++j) {
         MyGraph graph = MyGraph();
 
         std::string path = "";

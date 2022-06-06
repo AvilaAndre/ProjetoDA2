@@ -1,0 +1,33 @@
+\hypertarget{_stop_8h_source}{}\doxysection{Stop.\+h}
+\label{_stop_8h_source}\index{Classes/Stop.h@{Classes/Stop.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by asus on 20/05/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef PROJETODA2\_STOP\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define PROJETODA2\_STOP\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{class }\mbox{\hyperlink{class_stop}{Stop}} \{}
+\DoxyCodeLine{12 \textcolor{keyword}{private}:}
+\DoxyCodeLine{13     \textcolor{keywordtype}{int} id;}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{public}:}
+\DoxyCodeLine{17     \mbox{\hyperlink{class_stop}{Stop}}(\textcolor{keywordtype}{int} id\_);}
+\DoxyCodeLine{18     std::string toString();}
+\DoxyCodeLine{19     \textcolor{keywordtype}{int} getId();}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keywordtype}{bool} operator==(\mbox{\hyperlink{class_stop}{Stop}} stop2) \{}
+\DoxyCodeLine{22         \textcolor{keywordflow}{return} (this-\/>\textcolor{keywordtype}{id} == stop2.getId());}
+\DoxyCodeLine{23     \}}
+\DoxyCodeLine{24 \};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//PROJETODA2\_STOP\_H}}
+
+\end{DoxyCode}

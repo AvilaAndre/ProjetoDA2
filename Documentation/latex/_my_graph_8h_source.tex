@@ -1,0 +1,90 @@
+\hypertarget{_my_graph_8h_source}{}\doxysection{My\+Graph.\+h}
+\label{_my_graph_8h_source}\index{Classes/MyGraph.h@{Classes/MyGraph.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef PROJETODA2\_MYGRAPH\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define PROJETODA2\_MYGRAPH\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_edge}{Edge}} \{}
+\DoxyCodeLine{7 \textcolor{keyword}{private}:}
+\DoxyCodeLine{8     \textcolor{keywordtype}{int} dest;}
+\DoxyCodeLine{9     \textcolor{keywordtype}{double} capacity;}
+\DoxyCodeLine{10     \textcolor{keywordtype}{double} duration;}
+\DoxyCodeLine{11 \textcolor{keyword}{public}:}
+\DoxyCodeLine{18     \mbox{\hyperlink{struct_edge_a744f66381bed9b3d9da4e09bcb0a1088}{Edge}}(\textcolor{keywordtype}{int} dest, \textcolor{keywordtype}{double} c, \textcolor{keywordtype}{double} d);}
+\DoxyCodeLine{22     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_edge_a9739e3084717136eba2b911dfbfbb74d}{getDest}}();}
+\DoxyCodeLine{26     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_edge_af893ff9fa1e7a70124a8f4fe93b8d4b8}{getCapacity}}();}
+\DoxyCodeLine{30     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_edge_a83addf7b26f046822a8a6c91a3eeb520}{getDuration}}();}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_my_graph}{MyGraph}};}
+\DoxyCodeLine{33     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{struct_vertex}{Vertex}};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_vertex}{Vertex}} \{}
+\DoxyCodeLine{43     \mbox{\hyperlink{struct_vertex_a2b952f3d2840dd53e4673d7ab0ffb479}{Vertex}}(\textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{keyword}{private}:}
+\DoxyCodeLine{46     \textcolor{keywordtype}{int} id;}
+\DoxyCodeLine{47     std::vector<Edge> adj;}
+\DoxyCodeLine{48     \textcolor{keywordtype}{int} path = -\/1;}
+\DoxyCodeLine{49     \textcolor{keywordtype}{double} dist = 0;}
+\DoxyCodeLine{50     \textcolor{keywordtype}{bool} visited = \textcolor{keyword}{false};}
+\DoxyCodeLine{51 \textcolor{keyword}{public}:}
+\DoxyCodeLine{55     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_vertex_a03fab663348d118917946606fdd270fa}{getID}}();}
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_vertex_a9621453adaf159ffb8254c6633af3212}{addEdge}}(\textcolor{keywordtype}{int} dest, \textcolor{keywordtype}{double} capacity, \textcolor{keywordtype}{double} duration);}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{67     \textcolor{keywordtype}{double} \mbox{\hyperlink{struct_vertex_aad769df134e9604429913c13eee61c5a}{getDist}}();}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{73     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_vertex_a7278549bd148e721373003fa5d5648c5}{setDist}}(\textcolor{keywordtype}{double} value);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{78     std::vector<Edge> \mbox{\hyperlink{struct_vertex_a5eba006c489e33dc2e55cfc9e5348362}{getAdj}}();}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{83     \textcolor{keywordtype}{int} \mbox{\hyperlink{struct_vertex_ac57bf38f768baacfbea784a101013ca3}{getPath}}();}
+\DoxyCodeLine{88     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_vertex_ab4145ba404e554169c27f8352eb05dc2}{setPath}}(\textcolor{keywordtype}{int} idx);}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{93     \textcolor{keywordtype}{bool} \mbox{\hyperlink{struct_vertex_ad351148d2cd1e91b4ee5a6767373f5e1}{getVisited}}();}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{99     \textcolor{keywordtype}{void} \mbox{\hyperlink{struct_vertex_aa719055195e2e72e61dabc03c1f67551}{setVisited}}(\textcolor{keywordtype}{bool} value);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101     \textcolor{keyword}{friend} \textcolor{keyword}{class }\mbox{\hyperlink{class_my_graph}{MyGraph}};}
+\DoxyCodeLine{102 \};}
+\DoxyCodeLine{103 }
+\DoxyCodeLine{104 \textcolor{keyword}{class }\mbox{\hyperlink{class_my_graph}{MyGraph}} \{}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106     std::vector<Vertex> vertexSet;}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{108     std::vector<std::pair<int, std::vector<int>>> find22SolutionRecursiveReacher(\textcolor{keywordtype}{int} \textcolor{keyword}{self}, \textcolor{keywordtype}{double} capacity, std::vector<bool> visited, std::vector<int> path, \textcolor{keywordtype}{double} minCapacity, \textcolor{keywordtype}{int} maxTranshipment, \textcolor{keywordtype}{int} dest);}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{keyword}{public}:}
+\DoxyCodeLine{115     \mbox{\hyperlink{class_my_graph_a28bf434d062ec896de127989fe9ed303}{MyGraph}}();}
+\DoxyCodeLine{120     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_aaf7872eb3beb3525b00d63f48060331a}{setSize}}(\textcolor{keywordtype}{int} size);}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{126     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a071a4e0e5ba73311862afea8b15b1369}{addVertex}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id});}
+\DoxyCodeLine{134     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_a799eab6a0beb7c98206c3726b993dd0a}{addEdge}}(\textcolor{keywordtype}{int} orig, \textcolor{keywordtype}{int} dest, \textcolor{keywordtype}{double} cap, \textcolor{keywordtype}{double} duration);}
+\DoxyCodeLine{135 }
+\DoxyCodeLine{139     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_my_graph_aadc944f9c0ce5651760eccbd6e93d60e}{getNumVertex}}();}
+\DoxyCodeLine{143     std::vector<Vertex> \mbox{\hyperlink{class_my_graph_a77c522e0c866447ddd6bcc45ac70fbba}{getVertexSet}}();}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{150     \mbox{\hyperlink{struct_vertex}{Vertex}} \mbox{\hyperlink{class_my_graph_a626a5b4b3e845b42820b7a322fd84dde}{getVertex}}(\textcolor{keywordtype}{int} idx);}
+\DoxyCodeLine{151 }
+\DoxyCodeLine{156     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_add22895a51b2b9019cf7aba2393c58e3}{dijkstraHighestCapacityPath}}(\textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{162     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_my_graph_aa466011b39eb4882a9fde8176580f408}{BFS}}(\textcolor{keywordtype}{int} orig);}
+\DoxyCodeLine{163 }
+\DoxyCodeLine{169     std::vector<int> \mbox{\hyperlink{class_my_graph_a892b2f0bb1a10b4fe2bb215bc1f0d4d3}{getPath}}(\textcolor{keywordtype}{int} orig, \textcolor{keywordtype}{int} dest);}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{179     std::vector<std::pair<int, std::vector<int>>> \mbox{\hyperlink{class_my_graph_a8b571c552bb4c77271dbb30a8e94b75a}{find22Solution}}(\textcolor{keywordtype}{int} orig, \textcolor{keywordtype}{int} dest, \textcolor{keywordtype}{double} minCapacity, \textcolor{keywordtype}{int} maxTranshipment);}
+\DoxyCodeLine{180 }
+\DoxyCodeLine{190     std::vector<std::pair<double, std::vector<int>>> \mbox{\hyperlink{class_my_graph_ab96d21de76b8cd0d18a4d8549fdd8b34}{find22SolutionB}}(\textcolor{keywordtype}{int} orig, \textcolor{keywordtype}{int} dest, \textcolor{keywordtype}{double} minCapacity, \textcolor{keywordtype}{int} maxTranshipment, \textcolor{keywordtype}{int} answers);}
+\DoxyCodeLine{191 }
+\DoxyCodeLine{192 \};}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//PROJETODA2\_MYGRAPH\_H}}
+
+\end{DoxyCode}

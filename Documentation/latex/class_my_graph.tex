@@ -1,0 +1,198 @@
+\hypertarget{class_my_graph}{}\doxysection{My\+Graph Class Reference}
+\label{class_my_graph}\index{MyGraph@{MyGraph}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_my_graph_a28bf434d062ec896de127989fe9ed303}{My\+Graph}} ()
+\item 
+void \mbox{\hyperlink{class_my_graph_aaf7872eb3beb3525b00d63f48060331a}{set\+Size}} (int size)
+\item 
+void \mbox{\hyperlink{class_my_graph_a071a4e0e5ba73311862afea8b15b1369}{add\+Vertex}} (int id)
+\item 
+void \mbox{\hyperlink{class_my_graph_a799eab6a0beb7c98206c3726b993dd0a}{add\+Edge}} (int orig, int dest, double cap, double duration)
+\item 
+int \mbox{\hyperlink{class_my_graph_aadc944f9c0ce5651760eccbd6e93d60e}{get\+Num\+Vertex}} ()
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_vertex}{Vertex}} $>$ \mbox{\hyperlink{class_my_graph_a77c522e0c866447ddd6bcc45ac70fbba}{get\+Vertex\+Set}} ()
+\item 
+\mbox{\hyperlink{struct_vertex}{Vertex}} \mbox{\hyperlink{class_my_graph_a626a5b4b3e845b42820b7a322fd84dde}{get\+Vertex}} (int idx)
+\item 
+void \mbox{\hyperlink{class_my_graph_add22895a51b2b9019cf7aba2393c58e3}{dijkstra\+Highest\+Capacity\+Path}} (int i)
+\item 
+void \mbox{\hyperlink{class_my_graph_aa466011b39eb4882a9fde8176580f408}{BFS}} (int orig)
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{class_my_graph_a892b2f0bb1a10b4fe2bb215bc1f0d4d3}{get\+Path}} (int orig, int dest)
+\item 
+std\+::vector$<$ std\+::pair$<$ int, std\+::vector$<$ int $>$ $>$ $>$ \mbox{\hyperlink{class_my_graph_a8b571c552bb4c77271dbb30a8e94b75a}{find22\+Solution}} (int orig, int dest, double min\+Capacity, int max\+Transhipment)
+\item 
+std\+::vector$<$ std\+::pair$<$ double, std\+::vector$<$ int $>$ $>$ $>$ \mbox{\hyperlink{class_my_graph_ab96d21de76b8cd0d18a4d8549fdd8b34}{find22\+SolutionB}} (int orig, int dest, double min\+Capacity, int max\+Transhipment, int answers)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_my_graph_a28bf434d062ec896de127989fe9ed303}\label{class_my_graph_a28bf434d062ec896de127989fe9ed303}} 
+\index{MyGraph@{MyGraph}!MyGraph@{MyGraph}}
+\index{MyGraph@{MyGraph}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{MyGraph()}{MyGraph()}}
+{\footnotesize\ttfamily My\+Graph\+::\+My\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+The \mbox{\hyperlink{class_my_graph}{My\+Graph}} class constructor. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_my_graph_a799eab6a0beb7c98206c3726b993dd0a}\label{class_my_graph_a799eab6a0beb7c98206c3726b993dd0a}} 
+\index{MyGraph@{MyGraph}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
+{\footnotesize\ttfamily void My\+Graph\+::add\+Edge (\begin{DoxyParamCaption}\item[{int}]{orig,  }\item[{int}]{dest,  }\item[{double}]{cap,  }\item[{double}]{duration }\end{DoxyParamCaption})}
+
+Adds an \mbox{\hyperlink{struct_edge}{Edge}} to the \mbox{\hyperlink{struct_vertex}{Vertex}} with id orig with the values dest as id, cap as capacity and duration as duration. 
+\begin{DoxyParams}{Parameters}
+{\em orig} & \\
+\hline
+{\em dest} & \\
+\hline
+{\em cap} & \\
+\hline
+{\em duration} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_my_graph_a071a4e0e5ba73311862afea8b15b1369}\label{class_my_graph_a071a4e0e5ba73311862afea8b15b1369}} 
+\index{MyGraph@{MyGraph}!addVertex@{addVertex}}
+\index{addVertex@{addVertex}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{addVertex()}{addVertex()}}
+{\footnotesize\ttfamily void My\+Graph\+::add\+Vertex (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+Adds a \mbox{\hyperlink{struct_vertex}{Vertex}} with id \char`\"{}id\char`\"{} to the vertex\+Set vector. 
+\begin{DoxyParams}{Parameters}
+{\em id} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_my_graph_aa466011b39eb4882a9fde8176580f408}\label{class_my_graph_aa466011b39eb4882a9fde8176580f408}} 
+\index{MyGraph@{MyGraph}!BFS@{BFS}}
+\index{BFS@{BFS}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{BFS()}{BFS()}}
+{\footnotesize\ttfamily void My\+Graph\+::\+BFS (\begin{DoxyParamCaption}\item[{int}]{orig }\end{DoxyParamCaption})}
+
+Performs the BFS algorithm with origin orig. 
+\begin{DoxyParams}{Parameters}
+{\em orig} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_my_graph_add22895a51b2b9019cf7aba2393c58e3}\label{class_my_graph_add22895a51b2b9019cf7aba2393c58e3}} 
+\index{MyGraph@{MyGraph}!dijkstraHighestCapacityPath@{dijkstraHighestCapacityPath}}
+\index{dijkstraHighestCapacityPath@{dijkstraHighestCapacityPath}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{dijkstraHighestCapacityPath()}{dijkstraHighestCapacityPath()}}
+{\footnotesize\ttfamily void My\+Graph\+::dijkstra\+Highest\+Capacity\+Path (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+Performs the dijkstra algorithm with origin i having capacity as a priority, uses a \mbox{\hyperlink{class_max_heap}{Max\+Heap}}. 
+\begin{DoxyParams}{Parameters}
+{\em i} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_my_graph_a8b571c552bb4c77271dbb30a8e94b75a}\label{class_my_graph_a8b571c552bb4c77271dbb30a8e94b75a}} 
+\index{MyGraph@{MyGraph}!find22Solution@{find22Solution}}
+\index{find22Solution@{find22Solution}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{find22Solution()}{find22Solution()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ int, vector$<$ int $>$ $>$ $>$ My\+Graph\+::find22\+Solution (\begin{DoxyParamCaption}\item[{int}]{orig,  }\item[{int}]{dest,  }\item[{double}]{min\+Capacity,  }\item[{int}]{max\+Transhipment }\end{DoxyParamCaption})}
+
+An unused solution to the 1.\+2 Situation that gets every possible path using recursion. 
+\begin{DoxyParams}{Parameters}
+{\em orig} & \\
+\hline
+{\em dest} & \\
+\hline
+{\em min\+Capacity} & \\
+\hline
+{\em max\+Transhipment} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector with paths and their respective maximumum capacities. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_my_graph_ab96d21de76b8cd0d18a4d8549fdd8b34}\label{class_my_graph_ab96d21de76b8cd0d18a4d8549fdd8b34}} 
+\index{MyGraph@{MyGraph}!find22SolutionB@{find22SolutionB}}
+\index{find22SolutionB@{find22SolutionB}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{find22SolutionB()}{find22SolutionB()}}
+{\footnotesize\ttfamily vector$<$ pair$<$ double, vector$<$ int $>$ $>$ $>$ My\+Graph\+::find22\+SolutionB (\begin{DoxyParamCaption}\item[{int}]{orig,  }\item[{int}]{dest,  }\item[{double}]{min\+Capacity,  }\item[{int}]{max\+Transhipment,  }\item[{int}]{answers }\end{DoxyParamCaption})}
+
+Gets every possible path within the min\+Capacity capacity cap and the max\+Transhipment transhipment cap. 
+\begin{DoxyParams}{Parameters}
+{\em orig} & \\
+\hline
+{\em dest} & \\
+\hline
+{\em min\+Capacity} & \\
+\hline
+{\em max\+Transhipment} & \\
+\hline
+{\em answers} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector with paths and their respective maximum capacities. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_my_graph_aadc944f9c0ce5651760eccbd6e93d60e}\label{class_my_graph_aadc944f9c0ce5651760eccbd6e93d60e}} 
+\index{MyGraph@{MyGraph}!getNumVertex@{getNumVertex}}
+\index{getNumVertex@{getNumVertex}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{getNumVertex()}{getNumVertex()}}
+{\footnotesize\ttfamily int My\+Graph\+::get\+Num\+Vertex (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the size of the vertex\+Set -\/ 1 devido ao \mbox{\hyperlink{struct_vertex}{Vertex}} na posição 0 não contar. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_my_graph_a892b2f0bb1a10b4fe2bb215bc1f0d4d3}\label{class_my_graph_a892b2f0bb1a10b4fe2bb215bc1f0d4d3}} 
+\index{MyGraph@{MyGraph}!getPath@{getPath}}
+\index{getPath@{getPath}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ My\+Graph\+::get\+Path (\begin{DoxyParamCaption}\item[{int}]{orig,  }\item[{int}]{dest }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em orig} & \\
+\hline
+{\em dest} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the path from the \mbox{\hyperlink{struct_vertex}{Vertex}} with id orig to the \mbox{\hyperlink{struct_vertex}{Vertex}} with id dest. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_my_graph_a626a5b4b3e845b42820b7a322fd84dde}\label{class_my_graph_a626a5b4b3e845b42820b7a322fd84dde}} 
+\index{MyGraph@{MyGraph}!getVertex@{getVertex}}
+\index{getVertex@{getVertex}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{getVertex()}{getVertex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_vertex}{Vertex}} My\+Graph\+::get\+Vertex (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em idx} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the \mbox{\hyperlink{struct_vertex}{Vertex}} with id \char`\"{}idx\char`\"{}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_my_graph_a77c522e0c866447ddd6bcc45ac70fbba}\label{class_my_graph_a77c522e0c866447ddd6bcc45ac70fbba}} 
+\index{MyGraph@{MyGraph}!getVertexSet@{getVertexSet}}
+\index{getVertexSet@{getVertexSet}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{getVertexSet()}{getVertexSet()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{struct_vertex}{Vertex}} $>$ My\+Graph\+::get\+Vertex\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the vertex\+Set vector. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_my_graph_aaf7872eb3beb3525b00d63f48060331a}\label{class_my_graph_aaf7872eb3beb3525b00d63f48060331a}} 
+\index{MyGraph@{MyGraph}!setSize@{setSize}}
+\index{setSize@{setSize}!MyGraph@{MyGraph}}
+\doxysubsubsection{\texorpdfstring{setSize()}{setSize()}}
+{\footnotesize\ttfamily void My\+Graph\+::set\+Size (\begin{DoxyParamCaption}\item[{int}]{size }\end{DoxyParamCaption})}
+
+Sets the vertex\+Set size as \char`\"{}size\char`\"{}. 
+\begin{DoxyParams}{Parameters}
+{\em size} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/My\+Graph.\+h\item 
+Classes/My\+Graph.\+cpp\end{DoxyCompactItemize}

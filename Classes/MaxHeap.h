@@ -1,7 +1,3 @@
-//
-// Created by asus on 01/06/2022.
-//
-
 #ifndef PROJETODA2_MAXHEAP_H
 #define PROJETODA2_MAXHEAP_H
 
@@ -28,17 +24,58 @@ class MaxHeap {
     unordered_map<K, int> pos; // maps a key into its position on the array a
     const K KEY_NOT_FOUND;
 
+    /**
+     * Make a value go "up the tree" until it reaches its position
+     * @param i
+     */
     void upHeap(int i);
+    /**
+     * Make a value go "down the tree" until it reaches its position
+     * @param i
+     */
     void downHeap(int i);
+    /**
+     * Swap two positions of the heap (update their positions)
+     * @param i1
+     * @param i2
+     */
     void swap(int i1, int i2);
 
 public:
-    MaxHeap(int n, const K& notFound); // Create a max-heap for a max of n pairs (K,V) with notFound returned when empty
-    int getSize();              // Return number of elements in the heap
-    bool hasKey(const K& key);  // Heap has key?
-    void insert(const K& key, const V& value);      // Insert (key, value) on the heap
-    void increaseKey(const K& key, const V& value); // Decrease value of key
-    pair<K,V> removeMax(); // remove and return key with greater value
+    /**
+     * Create a max-heap for a max of n pairs (K,V) with notFound returned when empty
+     * @param n
+     * @param notFound
+     */
+    MaxHeap(int n, const K& notFound);
+    /**
+     * Return number of elements in the heap
+     * @return
+     */
+    int getSize();
+    /**
+     * Heap has key?
+     * @param key
+     * @return
+     */
+    bool hasKey(const K& key);
+    /**
+     * Insert (key, value) on the heap
+     * @param key
+     * @param value
+     */
+    void insert(const K& key, const V& value);
+    /**
+     * Decrease value of key
+     * @param key
+     * @param value
+     */
+    void increaseKey(const K& key, const V& value);
+    /**
+     * Remove and return key with greater value
+     * @return
+     */
+    pair<K,V> removeMax();
 };
 // ----------------------------------------------
 

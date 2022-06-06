@@ -1,7 +1,3 @@
-//
-// Created by asus on 01/06/2022.
-//
-
 #include "MyGraph.h"
 #include "MaxHeap.h"
 #include <limits>

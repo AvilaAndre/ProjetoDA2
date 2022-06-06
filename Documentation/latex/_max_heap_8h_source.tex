@@ -1,0 +1,127 @@
+\hypertarget{_max_heap_8h_source}{}\doxysection{Max\+Heap.\+h}
+\label{_max_heap_8h_source}\index{Classes/MaxHeap.h@{Classes/MaxHeap.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef PROJETODA2\_MAXHEAP\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define PROJETODA2\_MAXHEAP\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <unordered\_map>}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#define LEFT(i) (2*(i))}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define RIGHT(i) (2*(i)+1)}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define PARENT(i) ((i)/2)}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{comment}{// Binary max-\/heap to represent integer keys of type K with values (priorities) of type V}}
+\DoxyCodeLine{14 \textcolor{keyword}{template} <\textcolor{keyword}{class} K, \textcolor{keyword}{class} V>}
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{class_max_heap}{MaxHeap}} \{}
+\DoxyCodeLine{16     \textcolor{keyword}{struct }Node \{ \textcolor{comment}{// An element of the heap: a pair (key, value)}}
+\DoxyCodeLine{17         K key;}
+\DoxyCodeLine{18         V value;}
+\DoxyCodeLine{19     \};}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keywordtype}{int} size;                  \textcolor{comment}{// Number of elements in heap}}
+\DoxyCodeLine{22     \textcolor{keywordtype}{int} maxSize;               \textcolor{comment}{// Maximum number of elements in heap}}
+\DoxyCodeLine{23     vector<Node> a;            \textcolor{comment}{// The heap array}}
+\DoxyCodeLine{24     unordered\_map<K, int> pos; \textcolor{comment}{// maps a key into its position on the array a}}
+\DoxyCodeLine{25     \textcolor{keyword}{const} K KEY\_NOT\_FOUND;}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{31     \textcolor{keywordtype}{void} upHeap(\textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{36     \textcolor{keywordtype}{void} downHeap(\textcolor{keywordtype}{int} i);}
+\DoxyCodeLine{42     \textcolor{keywordtype}{void} swap(\textcolor{keywordtype}{int} i1, \textcolor{keywordtype}{int} i2);}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{keyword}{public}:}
+\DoxyCodeLine{50     \mbox{\hyperlink{class_max_heap_a4b7fb8601747d2c8364fe7525f23f45c}{MaxHeap}}(\textcolor{keywordtype}{int} n, \textcolor{keyword}{const} K\& notFound);}
+\DoxyCodeLine{55     \textcolor{keywordtype}{int} \mbox{\hyperlink{class_max_heap_a4d11babd3ad4e094967a405331310fcd}{getSize}}();}
+\DoxyCodeLine{61     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_max_heap_a3993a6e51f5114b931051144fff98bb5}{hasKey}}(\textcolor{keyword}{const} K\& key);}
+\DoxyCodeLine{67     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_max_heap_a7c7ced384549da4847be60e2bbc10940}{insert}}(\textcolor{keyword}{const} K\& key, \textcolor{keyword}{const} V\& value);}
+\DoxyCodeLine{73     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_max_heap_afc96285c3c1a9e7878c0f9af2864c5d7}{increaseKey}}(\textcolor{keyword}{const} K\& key, \textcolor{keyword}{const} V\& value);}
+\DoxyCodeLine{78     pair<K,V> \mbox{\hyperlink{class_max_heap_ac419d601cadcb8e8b4e94cda35653a08}{removeMax}}();}
+\DoxyCodeLine{79 \};}
+\DoxyCodeLine{80 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 \textcolor{comment}{// Make a value go "{}up the tree"{} until it reaches its position}}
+\DoxyCodeLine{83 \textcolor{keyword}{template} <\textcolor{keyword}{class} K, \textcolor{keyword}{class} V>}
+\DoxyCodeLine{84 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_max_heap}{MaxHeap<K,V>::upHeap}}(\textcolor{keywordtype}{int} i) \{}
+\DoxyCodeLine{85     \textcolor{keywordflow}{while} (i>1 \&\& a[i].value > a[PARENT(i)].value) \{ \textcolor{comment}{// while pos greater than parent, keep swapping to upper position}}
+\DoxyCodeLine{86         swap(i, PARENT(i));}
+\DoxyCodeLine{87         i = PARENT(i);}
+\DoxyCodeLine{88     \}}
+\DoxyCodeLine{89 \}}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91 \textcolor{comment}{// Make a value go "{}down the tree"{} until it reaches its position}}
+\DoxyCodeLine{92 \textcolor{keyword}{template} <\textcolor{keyword}{class} K, \textcolor{keyword}{class} V>}
+\DoxyCodeLine{93 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_max_heap}{MaxHeap<K,V>::downHeap}}(\textcolor{keywordtype}{int} i) \{}
+\DoxyCodeLine{94     \textcolor{keywordflow}{while} (LEFT(i) <= size) \{ \textcolor{comment}{// while within heap limits}}
+\DoxyCodeLine{95         \textcolor{keywordtype}{int} j = LEFT(i);}
+\DoxyCodeLine{96         \textcolor{keywordflow}{if} (RIGHT(i)<=size \&\& a[RIGHT(i)].value > a[j].value) j = RIGHT(i); \textcolor{comment}{// choose greater child}}
+\DoxyCodeLine{97         \textcolor{keywordflow}{if} (a[i].value > a[j].value) \textcolor{keywordflow}{break};   \textcolor{comment}{// node already greater than children, stop}}
+\DoxyCodeLine{98         swap(i, j);                    \textcolor{comment}{// otherwise, swap with greater child}}
+\DoxyCodeLine{99         i = j;}
+\DoxyCodeLine{100     \}}
+\DoxyCodeLine{101 \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103 \textcolor{comment}{// Swap two positions of the heap (update their positions)}}
+\DoxyCodeLine{104 \textcolor{keyword}{template} <\textcolor{keyword}{class} K, \textcolor{keyword}{class} V>}
+\DoxyCodeLine{105 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_max_heap}{MaxHeap<K,V>::swap}}(\textcolor{keywordtype}{int} i1, \textcolor{keywordtype}{int} i2) \{}
+\DoxyCodeLine{106     Node tmp = a[i1]; a[i1] = a[i2]; a[i2] = tmp;}
+\DoxyCodeLine{107     pos[a[i1].key] = i1;}
+\DoxyCodeLine{108     pos[a[i2].key] = i2;}
+\DoxyCodeLine{109 \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{comment}{// -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113 \textcolor{comment}{// Create a max-\/heap for a max of n pairs (K,V) with notFound returned when empty}}
+\DoxyCodeLine{114 \textcolor{keyword}{template} <\textcolor{keyword}{class} K, \textcolor{keyword}{class} V>}
+\DoxyCodeLine{115 \mbox{\hyperlink{class_max_heap_a4b7fb8601747d2c8364fe7525f23f45c}{MaxHeap<K,V>::MaxHeap}}(\textcolor{keywordtype}{int} n, \textcolor{keyword}{const} K\& notFound) : KEY\_NOT\_FOUND(notFound), size(0), maxSize(n), a(n+1) \{}
+\DoxyCodeLine{116 \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \textcolor{comment}{// Return number of elements in the heap}}
+\DoxyCodeLine{119 \textcolor{keyword}{template} <\textcolor{keyword}{class} K, \textcolor{keyword}{class} V>}
+\DoxyCodeLine{120 \textcolor{keywordtype}{int} \mbox{\hyperlink{class_max_heap_a4d11babd3ad4e094967a405331310fcd}{MaxHeap<K,V>::getSize}}() \{}
+\DoxyCodeLine{121     \textcolor{keywordflow}{return} size;}
+\DoxyCodeLine{122 \}}
+\DoxyCodeLine{123 }
+\DoxyCodeLine{124 \textcolor{comment}{// Heap has key?}}
+\DoxyCodeLine{125 \textcolor{keyword}{template} <\textcolor{keyword}{class} K, \textcolor{keyword}{class} V>}
+\DoxyCodeLine{126 \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_max_heap_a3993a6e51f5114b931051144fff98bb5}{MaxHeap<K, V>::hasKey}}(\textcolor{keyword}{const} K\& key) \{}
+\DoxyCodeLine{127     \textcolor{keywordflow}{return} pos.find(key) != pos.end();}
+\DoxyCodeLine{128 \}}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130 \textcolor{comment}{// Insert (key, value) on the heap}}
+\DoxyCodeLine{131 \textcolor{keyword}{template} <\textcolor{keyword}{class} K, \textcolor{keyword}{class} V>}
+\DoxyCodeLine{132 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_max_heap_a7c7ced384549da4847be60e2bbc10940}{MaxHeap<K,V>::insert}}(\textcolor{keyword}{const} K\& key, \textcolor{keyword}{const} V\& value) \{}
+\DoxyCodeLine{133     \textcolor{keywordflow}{if} (size == maxSize) \textcolor{keywordflow}{return}; \textcolor{comment}{// heap is full, do nothing}}
+\DoxyCodeLine{134     \textcolor{keywordflow}{if} (hasKey(key)) \textcolor{keywordflow}{return};     \textcolor{comment}{// key already exists, do nothing}}
+\DoxyCodeLine{135     a[++size] = \{key, value\};}
+\DoxyCodeLine{136     pos[key] = size;}
+\DoxyCodeLine{137     upHeap(size);}
+\DoxyCodeLine{138 \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140 \textcolor{comment}{// Increase value of key to the indicated value}}
+\DoxyCodeLine{141 \textcolor{keyword}{template} <\textcolor{keyword}{class} K, \textcolor{keyword}{class} V>}
+\DoxyCodeLine{142 \textcolor{keywordtype}{void} \mbox{\hyperlink{class_max_heap_afc96285c3c1a9e7878c0f9af2864c5d7}{MaxHeap<K,V>::increaseKey}}(\textcolor{keyword}{const} K\& key, \textcolor{keyword}{const} V\& value) \{}
+\DoxyCodeLine{143     \textcolor{keywordflow}{if} (!hasKey(key)) \textcolor{keywordflow}{return}; \textcolor{comment}{// key does not exist, do nothing}}
+\DoxyCodeLine{144     \textcolor{keywordtype}{int} i = pos[key];}
+\DoxyCodeLine{145     \textcolor{keywordflow}{if} (value < a[i].value) \textcolor{keywordflow}{return}; \textcolor{comment}{// value would decrease, do nothing}}
+\DoxyCodeLine{146     a[i].value = value;}
+\DoxyCodeLine{147     upHeap(i);}
+\DoxyCodeLine{148 \}}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150 \textcolor{comment}{// remove and return key with greater value}}
+\DoxyCodeLine{151 \textcolor{keyword}{template} <\textcolor{keyword}{class} K, \textcolor{keyword}{class} V>}
+\DoxyCodeLine{152 pair<K,V> \mbox{\hyperlink{class_max_heap_ac419d601cadcb8e8b4e94cda35653a08}{MaxHeap<K,V>::removeMax}}() \{}
+\DoxyCodeLine{153     \textcolor{keywordflow}{if} (size == 0) \textcolor{keywordflow}{return} make\_pair(KEY\_NOT\_FOUND,KEY\_NOT\_FOUND);}
+\DoxyCodeLine{154     K max = a[1].key;}
+\DoxyCodeLine{155     V value = a[1].value;}
+\DoxyCodeLine{156     pos.erase(max);}
+\DoxyCodeLine{157     a[1] = a[size-\/-\/];}
+\DoxyCodeLine{158     downHeap(1);}
+\DoxyCodeLine{159     \textcolor{keywordflow}{return}  make\_pair(max, value);}
+\DoxyCodeLine{160 \}}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//PROJETODA2\_MAXHEAP\_H}}
+
+\end{DoxyCode}

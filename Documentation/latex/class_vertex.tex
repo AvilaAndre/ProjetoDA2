@@ -1,0 +1,126 @@
+\hypertarget{class_vertex}{}\doxysection{Vertex\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Struct Template Reference}
+\label{class_vertex}\index{Vertex$<$ T $>$@{Vertex$<$ T $>$}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vertex_afcbdd4d4198b672356559cb8fa088408}\label{class_vertex_afcbdd4d4198b672356559cb8fa088408}} 
+{\bfseries Vertex} (T in)
+\item 
+\mbox{\Hypertarget{class_vertex_a5a6670b842354232bac4dad2f551d66e}\label{class_vertex_a5a6670b842354232bac4dad2f551d66e}} 
+bool {\bfseries operator$<$} (\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$ \&vertex) const
+\item 
+\mbox{\Hypertarget{class_vertex_a48eae2f7af2362634adab02b7b2dbec6}\label{class_vertex_a48eae2f7af2362634adab02b7b2dbec6}} 
+T {\bfseries get\+Info} () const
+\item 
+\mbox{\Hypertarget{class_vertex_a01e90e3cdb2ee11dd3b1d593c8207382}\label{class_vertex_a01e90e3cdb2ee11dd3b1d593c8207382}} 
+double {\bfseries get\+Dist} () const
+\item 
+\mbox{\Hypertarget{class_vertex_aab5816625f7aa9ee8f3c1b1401673a61}\label{class_vertex_aab5816625f7aa9ee8f3c1b1401673a61}} 
+\mbox{\hyperlink{class_vertex}{Vertex}} $\ast$ {\bfseries get\+Path} () const
+\item 
+\mbox{\hyperlink{class_vertex_a235bdd099d26e1695b94f420af1721f1}{Vertex}} (int i)
+\item 
+int \mbox{\hyperlink{class_vertex_ac4631da9a384025de458e039193898a6}{get\+ID}} ()
+\item 
+void \mbox{\hyperlink{class_vertex_a93fc4ae3b5f6759366898ba48bbbefe4}{add\+Edge}} (int dest, double capacity, double duration)
+\item 
+double \mbox{\hyperlink{class_vertex_a2d06d0997dd56735bad8baa45f45d3a0}{get\+Dist}} ()
+\item 
+\mbox{\Hypertarget{class_vertex_af40273a3853645871e22f4716f08afc2}\label{class_vertex_af40273a3853645871e22f4716f08afc2}} 
+void {\bfseries set\+Dist} (double value)
+\item 
+\mbox{\Hypertarget{class_vertex_ad0ff6dcf4329eb5c8df07428bce6d522}\label{class_vertex_ad0ff6dcf4329eb5c8df07428bce6d522}} 
+std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}} $>$ {\bfseries get\+Adj} ()
+\item 
+\mbox{\Hypertarget{class_vertex_a74fa5aba8322a9fd1ac3c665c6b72182}\label{class_vertex_a74fa5aba8322a9fd1ac3c665c6b72182}} 
+int {\bfseries get\+Path} ()
+\item 
+\mbox{\Hypertarget{class_vertex_a43b3ab07f33285e22e0a872f120c0897}\label{class_vertex_a43b3ab07f33285e22e0a872f120c0897}} 
+void {\bfseries set\+Path} (int idx)
+\item 
+\mbox{\Hypertarget{class_vertex_a32cb66998d594d10170f448c9a25757c}\label{class_vertex_a32cb66998d594d10170f448c9a25757c}} 
+bool {\bfseries get\+Visited} ()
+\item 
+\mbox{\Hypertarget{class_vertex_affa274de94b3f92540ed58e725b95dbc}\label{class_vertex_affa274de94b3f92540ed58e725b95dbc}} 
+void {\bfseries set\+Visited} (bool value)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vertex_a4221ac83540cf1e30c7a423f05607eb9}\label{class_vertex_a4221ac83540cf1e30c7a423f05607eb9}} 
+std\+::vector$<$ \mbox{\hyperlink{class_edge}{Edge}}$<$ T $>$ $>$ {\bfseries adj}
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_vertex_aefa9b76cd57411c5354e5620dc2d84dd}\label{class_vertex_aefa9b76cd57411c5354e5620dc2d84dd}} 
+class {\bfseries Graph$<$ T $>$}
+\item 
+\mbox{\Hypertarget{class_vertex_ae53e0b4fec14b9f1eaa8a4f8cd426e9e}\label{class_vertex_ae53e0b4fec14b9f1eaa8a4f8cd426e9e}} 
+class {\bfseries Mutable\+Priority\+Queue$<$ Vertex$<$ T $>$ $>$}
+\item 
+\mbox{\Hypertarget{class_vertex_a4e88033b785f34e3b54ecafefd82fbe5}\label{class_vertex_a4e88033b785f34e3b54ecafefd82fbe5}} 
+class {\bfseries My\+Graph}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_vertex_a235bdd099d26e1695b94f420af1721f1}\label{class_vertex_a235bdd099d26e1695b94f420af1721f1}} 
+\index{Vertex$<$ T $>$@{Vertex$<$ T $>$}!Vertex@{Vertex}}
+\index{Vertex@{Vertex}!Vertex$<$ T $>$@{Vertex$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vertex()}{Vertex()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$\+::\mbox{\hyperlink{class_vertex}{Vertex}} (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{class_vertex}{Vertex}} object with id \char`\"{}i\char`\"{}. 
+\begin{DoxyParams}{Parameters}
+{\em i} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_vertex_a93fc4ae3b5f6759366898ba48bbbefe4}\label{class_vertex_a93fc4ae3b5f6759366898ba48bbbefe4}} 
+\index{Vertex$<$ T $>$@{Vertex$<$ T $>$}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!Vertex$<$ T $>$@{Vertex$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$\+::add\+Edge (\begin{DoxyParamCaption}\item[{int}]{dest,  }\item[{double}]{capacity,  }\item[{double}]{duration }\end{DoxyParamCaption})}
+
+Adds an \mbox{\hyperlink{class_edge}{Edge}} to the \mbox{\hyperlink{class_vertex}{Vertex}}\textquotesingle{}s adj vector. 
+\begin{DoxyParams}{Parameters}
+{\em dest} & the \mbox{\hyperlink{class_edge}{Edge}}\textquotesingle{}s destination id. \\
+\hline
+{\em capacity} & the \mbox{\hyperlink{class_edge}{Edge}}\textquotesingle{}s capacity. \\
+\hline
+{\em duration} & the \mbox{\hyperlink{class_edge}{Edge}}\textquotesingle{}s duration. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_vertex_a2d06d0997dd56735bad8baa45f45d3a0}\label{class_vertex_a2d06d0997dd56735bad8baa45f45d3a0}} 
+\index{Vertex$<$ T $>$@{Vertex$<$ T $>$}!getDist@{getDist}}
+\index{getDist@{getDist}!Vertex$<$ T $>$@{Vertex$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getDist()}{getDist()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+double \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$\+::get\+Dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+returns the ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_vertex_ac4631da9a384025de458e039193898a6}\label{class_vertex_ac4631da9a384025de458e039193898a6}} 
+\index{Vertex$<$ T $>$@{Vertex$<$ T $>$}!getID@{getID}}
+\index{getID@{getID}!Vertex$<$ T $>$@{Vertex$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{getID()}{getID()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \mbox{\hyperlink{class_vertex}{Vertex}}$<$ T $>$\+::get\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+returns the \mbox{\hyperlink{class_vertex}{Vertex}}\textquotesingle{}s id. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/Graph.\+h\item 
+Classes/My\+Graph.\+h\item 
+Classes/My\+Graph.\+cpp\end{DoxyCompactItemize}

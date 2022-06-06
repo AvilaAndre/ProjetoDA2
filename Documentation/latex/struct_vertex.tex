@@ -1,0 +1,147 @@
+\hypertarget{struct_vertex}{}\doxysection{Vertex Struct Reference}
+\label{struct_vertex}\index{Vertex@{Vertex}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_vertex_a2b952f3d2840dd53e4673d7ab0ffb479}{Vertex}} (int i)
+\item 
+int \mbox{\hyperlink{struct_vertex_a03fab663348d118917946606fdd270fa}{get\+ID}} ()
+\item 
+void \mbox{\hyperlink{struct_vertex_a9621453adaf159ffb8254c6633af3212}{add\+Edge}} (int dest, double capacity, double duration)
+\item 
+double \mbox{\hyperlink{struct_vertex_aad769df134e9604429913c13eee61c5a}{get\+Dist}} ()
+\item 
+void \mbox{\hyperlink{struct_vertex_a7278549bd148e721373003fa5d5648c5}{set\+Dist}} (double value)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{struct_edge}{Edge}} $>$ \mbox{\hyperlink{struct_vertex_a5eba006c489e33dc2e55cfc9e5348362}{get\+Adj}} ()
+\item 
+int \mbox{\hyperlink{struct_vertex_ac57bf38f768baacfbea784a101013ca3}{get\+Path}} ()
+\item 
+void \mbox{\hyperlink{struct_vertex_ab4145ba404e554169c27f8352eb05dc2}{set\+Path}} (int idx)
+\item 
+bool \mbox{\hyperlink{struct_vertex_ad351148d2cd1e91b4ee5a6767373f5e1}{get\+Visited}} ()
+\item 
+void \mbox{\hyperlink{struct_vertex_aa719055195e2e72e61dabc03c1f67551}{set\+Visited}} (bool value)
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_vertex_a4e88033b785f34e3b54ecafefd82fbe5}\label{struct_vertex_a4e88033b785f34e3b54ecafefd82fbe5}} 
+class {\bfseries My\+Graph}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{struct_vertex_a2b952f3d2840dd53e4673d7ab0ffb479}\label{struct_vertex_a2b952f3d2840dd53e4673d7ab0ffb479}} 
+\index{Vertex@{Vertex}!Vertex@{Vertex}}
+\index{Vertex@{Vertex}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{Vertex()}{Vertex()}}
+{\footnotesize\ttfamily Vertex\+::\+Vertex (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+Creates a \mbox{\hyperlink{struct_vertex}{Vertex}} object with id \char`\"{}i\char`\"{}. 
+\begin{DoxyParams}{Parameters}
+{\em i} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_vertex_a9621453adaf159ffb8254c6633af3212}\label{struct_vertex_a9621453adaf159ffb8254c6633af3212}} 
+\index{Vertex@{Vertex}!addEdge@{addEdge}}
+\index{addEdge@{addEdge}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{addEdge()}{addEdge()}}
+{\footnotesize\ttfamily void Vertex\+::add\+Edge (\begin{DoxyParamCaption}\item[{int}]{dest,  }\item[{double}]{capacity,  }\item[{double}]{duration }\end{DoxyParamCaption})}
+
+Adds an \mbox{\hyperlink{struct_edge}{Edge}} to the \mbox{\hyperlink{struct_vertex}{Vertex}}\textquotesingle{}s adj vector. 
+\begin{DoxyParams}{Parameters}
+{\em dest} & the \mbox{\hyperlink{struct_edge}{Edge}}\textquotesingle{}s destination id. \\
+\hline
+{\em capacity} & the \mbox{\hyperlink{struct_edge}{Edge}}\textquotesingle{}s capacity. \\
+\hline
+{\em duration} & the \mbox{\hyperlink{struct_edge}{Edge}}\textquotesingle{}s duration. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_vertex_a5eba006c489e33dc2e55cfc9e5348362}\label{struct_vertex_a5eba006c489e33dc2e55cfc9e5348362}} 
+\index{Vertex@{Vertex}!getAdj@{getAdj}}
+\index{getAdj@{getAdj}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getAdj()}{getAdj()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{struct_edge}{Edge}} $>$ Vertex\+::get\+Adj (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the adj vector. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_vertex_aad769df134e9604429913c13eee61c5a}\label{struct_vertex_aad769df134e9604429913c13eee61c5a}} 
+\index{Vertex@{Vertex}!getDist@{getDist}}
+\index{getDist@{getDist}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getDist()}{getDist()}}
+{\footnotesize\ttfamily double Vertex\+::get\+Dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the dist variable. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_vertex_a03fab663348d118917946606fdd270fa}\label{struct_vertex_a03fab663348d118917946606fdd270fa}} 
+\index{Vertex@{Vertex}!getID@{getID}}
+\index{getID@{getID}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getID()}{getID()}}
+{\footnotesize\ttfamily int Vertex\+::get\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the \mbox{\hyperlink{struct_vertex}{Vertex}}\textquotesingle{}s id. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_vertex_ac57bf38f768baacfbea784a101013ca3}\label{struct_vertex_ac57bf38f768baacfbea784a101013ca3}} 
+\index{Vertex@{Vertex}!getPath@{getPath}}
+\index{getPath@{getPath}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily int Vertex\+::get\+Path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+the path variable. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_vertex_ad351148d2cd1e91b4ee5a6767373f5e1}\label{struct_vertex_ad351148d2cd1e91b4ee5a6767373f5e1}} 
+\index{Vertex@{Vertex}!getVisited@{getVisited}}
+\index{getVisited@{getVisited}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{getVisited()}{getVisited()}}
+{\footnotesize\ttfamily bool Vertex\+::get\+Visited (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+if the \mbox{\hyperlink{struct_vertex}{Vertex}} has been visited. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{struct_vertex_a7278549bd148e721373003fa5d5648c5}\label{struct_vertex_a7278549bd148e721373003fa5d5648c5}} 
+\index{Vertex@{Vertex}!setDist@{setDist}}
+\index{setDist@{setDist}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setDist()}{setDist()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Dist (\begin{DoxyParamCaption}\item[{double}]{value }\end{DoxyParamCaption})}
+
+Sets the dist variable as value. 
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_vertex_ab4145ba404e554169c27f8352eb05dc2}\label{struct_vertex_ab4145ba404e554169c27f8352eb05dc2}} 
+\index{Vertex@{Vertex}!setPath@{setPath}}
+\index{setPath@{setPath}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setPath()}{setPath()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Path (\begin{DoxyParamCaption}\item[{int}]{idx }\end{DoxyParamCaption})}
+
+Sets the path variable as idx. 
+\begin{DoxyParams}{Parameters}
+{\em idx} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{struct_vertex_aa719055195e2e72e61dabc03c1f67551}\label{struct_vertex_aa719055195e2e72e61dabc03c1f67551}} 
+\index{Vertex@{Vertex}!setVisited@{setVisited}}
+\index{setVisited@{setVisited}!Vertex@{Vertex}}
+\doxysubsubsection{\texorpdfstring{setVisited()}{setVisited()}}
+{\footnotesize\ttfamily void Vertex\+::set\+Visited (\begin{DoxyParamCaption}\item[{bool}]{value }\end{DoxyParamCaption})}
+
+Sets the visited variable as value. 
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Classes/My\+Graph.\+h\item 
+Classes/My\+Graph.\+cpp\end{DoxyCompactItemize}
