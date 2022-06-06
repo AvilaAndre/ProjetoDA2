@@ -9,15 +9,24 @@
 
 #define INF std::numeric_limits<double>::max()
 
+void buildPath(std::string *path, int number) {
+    if (number < 10)
+        *path = "in0" + std::to_string(number) + "_b";
+    else
+        *path = "in" + std::to_string(number) + "_b";
+}
+
 void Situation11(Helper helper) {
+    std::cout << "* Exercise 1.1" << std::endl;
+
     for (int j = 1; j < 11; ++j) {
         MyGraph graph = MyGraph();
+
         std::string path = "";
-        if (j < 10)
-            path = "in0" + std::to_string(j) + "_b";
-        else
-            path = "in" + std::to_string(j) + "_b";
+        buildPath(&path, j);
+
         helper.loadGraphWithData(&graph, path);
+
         graph.dijkstraHighestCapacityPath(1);
         std::vector<int> roadPath = graph.getPath(1, graph.getNumVertex());
         std::cout << "Path: ";
@@ -33,13 +42,13 @@ void Situation11(Helper helper) {
 
 
 void Situation12(Helper helper) {
+    std::cout << "* Exercise 1.2" << std::endl;
+
     for (int j = 0; j < 11; ++j) {
         MyGraph graph = MyGraph();
+
         std::string path = "";
-        if (j < 10)
-            path = "in0" + std::to_string(j) + "_b";
-        else
-            path = "in" + std::to_string(j) + "_b";
+        buildPath(&path, j);
 
         helper.loadGraphWithData(&graph, path);
 
@@ -98,8 +107,9 @@ void Situation12(Helper helper) {
     }
 }
 
-void Situation21(Helper helper) {
 
+
+void Situation21(Helper helper) {
     std::cout << "* Exercise 2.1" << std::endl;
 
     int graph_number;
@@ -111,12 +121,9 @@ void Situation21(Helper helper) {
     std::cin >> dimension;
 
     MyGraph graph = MyGraph();
-    //MyGraph rGraph = MyGraph();
+
     std::string path = "";
-    if (graph_number < 10)
-        path = "in0" + std::to_string(graph_number) + "_b";
-    else
-        path = "in" + std::to_string(graph_number) + "_b";
+    buildPath(&path, graph_number);
 
     std::cout << "CASE " << graph_number << std::endl;
     helper.loadGraphWithData(&graph, path);
@@ -140,6 +147,7 @@ void Situation21(Helper helper) {
     int parent[graph.getNumVertex()+1];
     int s = 1;
     int t = graph.getNumVertex();
+    int extra = 0; //free capacity
 
     while (helper.bfs(rGraph, s, t, parent)) {
         std::deque<int> caminho = {};
@@ -156,17 +164,18 @@ void Situation21(Helper helper) {
         caminho.push_front(s);
         encaminhamentos.push_back(caminho);
 
-        if (minCap < dimension) {
-            dimension -= minCap;
-        } else {
-            dimension = 0;
-            break;
-        }
-
         for (v = t; v != s; v = parent[v]) {
             u = parent[v];
             rGraph[u][v] -= minCap;
             rGraph[v][u] += minCap;
+        }
+
+        if (minCap < dimension) {
+            dimension -= minCap;
+        } else {
+            extra = minCap - dimension;
+            dimension = 0;
+            break;
         }
 
     }
@@ -184,43 +193,95 @@ void Situation21(Helper helper) {
         std::cout << "There are no possible paths for this dimension of people\n";
     }
 
-}
+    //Exercise 2.2
+    bool valid_option;
+    std::cout << "Do you want to increase the number of people in the group?" << std::endl;
+    do {
+        valid_option = true;
+        char user_answer;
+        std::cout << "(y/n)" << std::endl;
+        std::cin >> user_answer;
 
-void Situation22(Helper helper) {
-    for (int j = 1; j < 11; ++j) {
-        MyGraph graph = MyGraph();
-        std::string path = "";
-        if (j < 10)
-            path = "in0" + std::to_string(j) + "_b";
-        else
-            path = "in" + std::to_string(j) + "_b";
-        helper.loadGraphWithData(&graph, path);
-        graph.dijkstraHighestCapacityPath(1);
-        std::vector<int> roadPath = graph.getPath(1, graph.getNumVertex());
-        std::cout << "Path: ";
-        for (int i = 0; i < roadPath.size(); ++i) {
-            std::cout << i;
-            if (i != roadPath.size()-1) std::cout << "->";
+        switch (user_answer) {
+            case 'y':
+                //TODO
+                int add;
+                std::cout << "How many people do you want to add to the group?" << std::endl;
+                std::cin >> add;
+                if (add <= extra) {
+                    std::cout << "The paths are the same: " << std::endl;
+                    for (auto road: encaminhamentos) {
+                        for (int i = 0; i < road.size(); ++i) {
+                            std::cout << road[i];
+                            if (i != road.size()-1) std::cout << "->";
+                        }
+                        std::cout << std::endl;
+                    }
+                } else {
+                    add -= extra;
+                    while (helper.bfs(rGraph, s, t, parent)) {
+                        std::deque<int> caminho = {};
+                        int minCap = INT_MAX;
+                        for (v = t; v != s; v = parent[v]) {
+                            u = parent[v];
+                            caminho.push_front(v);
+                            if (minCap > rGraph[u][v]) {
+                                minCap = rGraph[u][v];
+                            }
+                        }
+
+                        caminho.push_front(s);
+                        encaminhamentos.push_back(caminho);
+
+                        for (v = t; v != s; v = parent[v]) {
+                            u = parent[v];
+                            rGraph[u][v] -= minCap;
+                            rGraph[v][u] += minCap;
+                        }
+
+                        if (minCap < add) {
+                            add -= minCap;
+                        } else {
+                            extra = minCap - add;
+                            add = 0;
+                            break;
+                        }
+                    }
+                    if (add == 0) {
+                        std::cout << "Possible paths:" << std::endl;
+                        for (auto road: encaminhamentos) {
+                            for (int i = 0; i < road.size(); ++i) {
+                                std::cout << road[i];
+                                if (i != road.size()-1) std::cout << "->";
+                            }
+                            std::cout << std::endl;
+                        }
+                    } else {
+                        std::cout << "There are no possible paths for this many people!\n";
+                    }
+
+                }
+                break;
+            case 'n':
+                return;
+            default:
+                valid_option = false;
+                std::cin.clear();
+                std::cin.ignore(100, '\n');
+                std::cout << "Invalid option. Please try again." << std::endl;
         }
-        std::cout << std::endl;
+    } while (!valid_option);
 
-        std::cout << "(" << j << ") Record: " << graph.getVertex(graph.getNumVertex()).getDist() << std::endl; //TODO: Perguntar ao user qual o que ele quer ver :)
-    }
 }
-
-
 
 void Situation23(Helper helper) {
-    //----
+    std::cout << "* Exercise 2.3" << std::endl;
+
     for (int j = 1; j < 11; ++j) {
         MyGraph graph = MyGraph();
-        //MyGraph rGraph = MyGraph();
-        std::string path = "";
-        if (j < 10)
-            path = "in0" + std::to_string(j) + "_b";
-        else
-            path = "in" + std::to_string(j) + "_b";
 
+        std::string path = "";
+        buildPath(&path, j);
 
         std::cout << "CASE " << j << std::endl;
         helper.loadGraphWithData(&graph, path);
@@ -283,15 +344,13 @@ void Situation23(Helper helper) {
 }
 
 void Situation24(Helper helper) {
+    std::cout << "* Exercise 2.4" << std::endl;
+
     for (int j = 0; j < 11; ++j) {
         MyGraph graph = MyGraph();
-        //MyGraph rGraph = MyGraph();
-        std::string path = "";
-        if (j < 10)
-            path = "in0" + std::to_string(j) + "_b";
-        else
-            path = "in" + std::to_string(j) + "_b";
 
+        std::string path = "";
+        buildPath(&path, j);
 
         std::cout << "CASE " << j << std::endl;
         helper.loadGraphWithData(&graph, path);
@@ -320,16 +379,14 @@ void Situation24(Helper helper) {
 }
 
 void Situation25(Helper helper) {
+    std::cout << "* Exercise 2.5" << std::endl;
+
     for (int j = 0; j < 11; ++j) {
         MyGraph graph = MyGraph();
-        //MyGraph rGraph = MyGraph();
+
         std::string path = "";
-        if (j < 10)
-            path = "in0" + std::to_string(j) + "_b";
-        else
-            path = "in" + std::to_string(j) + "_b";
-
-
+        buildPath(&path, j);
+        
         std::cout << "CASE " << j << std::endl;
         helper.loadGraphWithData(&graph, path);
 
@@ -439,7 +496,7 @@ int main() {
                 Situation21(help);
                 break;
             case 22 :
-                //Situation22(/*graph*/);
+                Situation21(help);
                 break;
             case 23 :
                 Situation23(help);
@@ -449,9 +506,6 @@ int main() {
                 break;
             case 25 :
                 Situation25(help);
-                break;
-            case 4:
-                Situation22(help);
                 break;
             case 0 :
                 separator();
