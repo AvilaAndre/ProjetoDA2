@@ -109,7 +109,7 @@ void Situation12(Helper helper) {
 
     int ansCap = 100;
     std::cout << "Maximum number of answers:";
-    std::cin >> t;
+    std::cin >> ansCap;
 
 
     double minCapacity = 0;
@@ -148,7 +148,7 @@ void Situation12(Helper helper) {
 
     std::vector<std::pair<double, std::vector<int>>> paretos = graph.find22SolutionB(s, t, minCapacity, maxTranshipment,  ansCap);
 
-    std::cout << "size: " << paretos.size() << std::endl;
+    std::cout << "Amount of pareto-optimal answers: " << paretos.size() << std::endl;
 
     for (int k = 0; k < paretos.size(); ++k) {
         std::cout << k+1 << " - " << paretos[k].first << " - Path: ";
@@ -221,7 +221,7 @@ void Situation21(Helper helper) {
     helper.loadGraphWithData(&graph, path);
 
     int dimension;
-    std::cout << "What dimension do you want? (1-" << graph.getNumVertex() << ")";
+    std::cout << "What dimension do you want?";
     std::cin >> dimension;
 
     int s = graph.getNumVertex();
